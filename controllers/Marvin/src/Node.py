@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 class Node:
     __layer = [] # layer in which the node resides
     __membranePotential = 0 # simplest version: sum of the weighted inputs
