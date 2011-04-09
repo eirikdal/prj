@@ -1,17 +1,6 @@
-'''
-Created on 8. apr. 2011
+import epuck_basic
 
-@author: hauk184
-'''
-
-class ANN(object):
-    '''
-    classdocs
-    '''
-
-
-    def __init__(selfparams):
-        '''
-        Constructor
-        '''
+class ANN(epuck_basic.EpuckBasic):
+    def __init__(self):
+        self
         
