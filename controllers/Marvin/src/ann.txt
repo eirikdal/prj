@@ -1,0 +1,17 @@
+layer_name marvin
+layer_type base_layer
+layer_size 4
+layer_act_func sigmoid
+
+link_name_pre presynap
+link_name_post postsynap
+link_conn_top full
+link_conn_prob 0.5
+link_learn_rule general-hebb
+link_learn_param 0.3
+link_learn_rate 0.5
+link_range 0,10
+
+begin exec_order
+marvin 0
+end exec_order

@@ -1,6 +1,6 @@
 import math
 
-import ann_data
+from ann_data import ANN_LAYER
 
 def sigmoid(self, x):
     return math.tanh(x)
@@ -11,6 +11,9 @@ def dsigmoid(self, y):
 class Layer(object):
     __nodes = []
     __activation_function = sigmoid
+    __name = ""
+    __type = ""
+    __size = 0
     __links_in = []
     __links_out = []
     __learning_mode = False
@@ -18,23 +21,26 @@ class Layer(object):
     __active_mode = False #Indicating whether or not the layer is currently able to a) update its neuron activation levels, and b) send those signals downstream neurons
     __max_settling_rounds = 0
     
-    def __init__(self,ann_data):
-        self.activation_function = act
+    def __init__(self,ann_layer):
+        self.__activation_function = ann_layer.get_layer_act_func()
+        self.__name = ann_layer.get_layer_name()
+        self.__size = ann_layer.get_layer_size()
+        self.__type = ann_layer.get_layer_type()
     
     def add_link_in(self, link):
-        self.links_in.append(link)
+        self.__links_in.append(link)
     
     def add_link_out(self,link):
-        self.links_out.append(link)
+        self.__links_out.append(link)
         
     def set_max_settlings_rounds(self, i):
-        self.max_settling_rounds = i
+        self.__max_settling_rounds = i
         
     def add_node(self, node):
-        self.nodes.append(node)
+        self.__nodes.append(node)
         
     def set_active(self, active):
-        self.active_mode = active
+        self.__active_mode = active
         
     def is_active(self):
-        return self.active_mode
+        return self.__active_mode
