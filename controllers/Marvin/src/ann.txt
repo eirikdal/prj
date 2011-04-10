@@ -1,17 +1,48 @@
-layer_name marvin
-layer_type base_layer
+begin layer
+layer_name sensors
+layer_type input
 layer_size 4
 layer_act_func sigmoid
+end layer
 
-link_name_pre presynap
-link_name_post postsynap
+begin layer
+layer_name hidden
+layer_type hidden
+layer_size 4
+layer_act_func sigmoid
+end layer
+
+begin layer
+layer_name motors
+layer_type output
+layer_size 4
+layer_act_func sigmoid
+end layer
+
+begin link
+link_name_pre sensors
+link_name_post hidden
 link_conn_top full
 link_conn_prob 0.5
 link_learn_rule general-hebb
 link_learn_param 0.3
 link_learn_rate 0.5
 link_range 0,10
+end link
+
+begin link
+link_name_pre hidden
+link_name_post motors
+link_conn_top full
+link_conn_prob 0.5
+link_learn_rule general-hebb
+link_learn_param 0.3
+link_learn_rate 0.5
+link_range 0,10
+end link
 
 begin exec_order
-marvin 0
+sensors 0
+hidden 1
+motors 2
 end exec_order

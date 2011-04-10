@@ -1,6 +1,7 @@
 import math
 
 from ann_data import ANN_LAYER
+from Node import Node
 
 def sigmoid(self, x):
     return math.tanh(x)
@@ -8,11 +9,16 @@ def sigmoid(self, x):
 def dsigmoid(self, y):
     return 1.0 - y**2
 
+class TYPE:
+    INPUT = 0
+    HIDDEN = 1
+    OUTPUT = 2
+
 class Layer(object):
     __nodes = []
     __activation_function = sigmoid
     __name = ""
-    __type = ""
+    __type = TYPE.INPUT
     __size = 0
     __links_in = []
     __links_out = []
@@ -25,7 +31,20 @@ class Layer(object):
         self.__activation_function = ann_layer.get_layer_act_func()
         self.__name = ann_layer.get_layer_name()
         self.__size = ann_layer.get_layer_size()
+        for i in range(self.__size):
+            self.__nodes.append(Node(self))
         self.__type = ann_layer.get_layer_type()
+        
+    def execute(self):
+        __sum = 0
+        for i in range(self.nodes):
+            for j in range(self.__links_in):
+                __sum += self.nodes[i] * self.__links_in[i];
+            for j in range(self.__links_out):
+                self.__links_out[j] = self.__activation_function(__sum)
+    
+    def get_type(self):
+        return self.__type
     
     def add_link_in(self, link):
         self.__links_in.append(link)
