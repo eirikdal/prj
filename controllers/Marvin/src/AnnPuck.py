@@ -1,13 +1,11 @@
 import AgentANN
 
+'''
+This is the interface to the WebANN class.
+'''
 class AnnPuck(AgentANN):
-    '''
-    classdocs
-    '''
-
+    
 
     def __init__(self):
-        '''
-        Constructor
-        '''
+        super()
         

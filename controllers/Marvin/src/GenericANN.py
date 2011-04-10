@@ -22,3 +22,13 @@ class GenericANN:
             self.__links.append(link)
             
         __exec_order = __ann_data.get_exec_order()
+    
+    def __integrate(self, layer):
+        ()
+        
+    def execute(self):
+        for name in self.__exec_order:
+            for layer in self.__layers:
+                if layer.get_name() == name:
+                    layer.execute()
+                    break
