@@ -13,11 +13,25 @@
 from epuck_basic import EpuckBasic
 from imagepro import column_avg
 
+from AnnPuck import AnnPuck
+import prims1
+
 # Here is the main class of your controller.
 # This class defines how to initialize and how to run your controller.
 # Note that this class derives EpuckBasic and so inherits all its functions
 class Marvin (EpuckBasic):
-  
+    def __init__(self, tempo = 1.0, e_thresh = 125, nvect = True, cvect = True, svect = True, band = 'bw', concol = 1.0, snapshow = True,
+              ann_cycles = 1, agent_cycles = 5, act_noise = 0.1, tfile = "redman4"):
+        EpuckBasic.__init__(self)
+        self.basic_setup() # defined for EpuckBasic 
+        self.ann = AnnPuck(agent = self, e_thresh = e_thresh, nvect = nvect, cvect = cvect, svect = svect, band = band, snapshow = snapshow,
+                   concol = concol, ann_cycles = ann_cycles, agent_cycles = agent_cycles, act_noise = act_noise,
+                   tfile = tfile)
+
+    def long_run(self,steps = 500):
+        self.ann.simsteps = steps
+        self.spin_angle(prims1.randab(0,360))
+        self.ann.redman_run()
     # User defined function for initializing and running
     # the Marvin class
     def run(self):
@@ -58,6 +72,11 @@ class Marvin (EpuckBasic):
 # function(s) and destroys it at the end of the execution.
 # Note that only one instance of Robot should be created in
 # a controller program.
+
+#from webann.py:
+#controller = WebAnn(tempo = 1.0, band = 'gray')
+#controller.long_run(40)
+
 controller = Marvin()
 controller.basic_setup()
 controller.continuous_run()
