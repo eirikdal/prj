@@ -3,7 +3,7 @@ import random
 import numpy 
 import math
 import prims1
-
+from bitarray import bitarray
 
 def gen_array(dimensions,init_elem = 0):
     size = 1
