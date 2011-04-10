@@ -11,19 +11,17 @@ import prims1
 class WebAnn(epb.EpuckBasic):
 
     def __init__(self, tempo = 1.0, e_thresh = 125, nvect = True, cvect = True, svect = True, band = 'bw', concol = 1.0, snapshow = True,
-		 ann_cycles = 1, agent_cycles = 5, act_noise = 0.1, tfile = "redman4"):
-	epb.EpuckBasic.__init__(self)
-	self.basic_setup() # defined for EpuckBasic 
-	self.ann = epuck2.annpuck2(agent = self, e_thresh = e_thresh, nvect = nvect, cvect = cvect, svect = svect, band = band, snapshow = snapshow,
-				   concol = concol, ann_cycles = ann_cycles, agent_cycles = agent_cycles, act_noise = act_noise,
-				   tfile = tfile)
-	
-
+                ann_cycles = 1, agent_cycles = 5, act_noise = 0.1, tfile = "redman4"):
+        epb.EpuckBasic.__init__(self)
+        self.basic_setup() # defined for EpuckBasic 
+        self.ann = epuck2.annpuck2(agent = self, e_thresh = e_thresh, nvect = nvect, cvect = cvect, svect = svect, band = band, snapshow = snapshow,
+        		   concol = concol, ann_cycles = ann_cycles, agent_cycles = agent_cycles, act_noise = act_noise,
+        		   tfile = tfile)
 
     def long_run(self,steps = 500):
-	self.ann.simsteps = steps
-	self.spin_angle(prims1.randab(0,360))
-	self.ann.redman_run()
+        self.ann.simsteps = steps
+        self.spin_angle(prims1.randab(0,360))
+        self.ann.redman_run()
     
 
 #*** MAIN ***

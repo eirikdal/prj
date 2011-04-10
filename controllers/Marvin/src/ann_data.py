@@ -14,7 +14,7 @@ class RULE:
     OJA=0
     GENERAL=1
 
-class ANN():
+class ANN:
     __layer_name = ""
     __layer_type = ""
     __layer_size = -1
@@ -50,42 +50,42 @@ class ANN():
     
     def set_layer_act_func(self,act):
         self.__layer_act_func = act
-    def get_layer_name(self):
+    def get_layer_act_func(self):
         return self.__layer_name
     
     def set_link_name_pre(self,pre):
         self.__link_name_pre = pre
-    def get_layer_name(self):
+    def get_link_name_pre(self):
         return self.__layer_name
     
     def set_link_name_post(self,post):
         self.__link_name_post = post
-    def get_layer_name(self):
+    def get_link_name_post(self):
         return self.__layer_name
     
     def set_link_conn_top(self,top):
         self.__link_conn_top = top
-    def get_layer_name(self):
+    def get_link_conn_top(self):
         return self.__layer_name
         
     def set_link_conn_prob(self,prob):
         self.__link_conn_prob = prob
-    def get_layer_name(self):
+    def get_link_conn_prob(self):
         return self.__layer_name
     
     def set_link_learn_rate(self,rate):
         self.__link_learn_rate = rate
-    def get_layer_name(self):
+    def get_link_learn_rate(self):
         return self.__layer_name
         
     def set_link_learn_param(self,param):
         self.__link_learn_param = param
-    def get_layer_name(self):
+    def get_link_learn_param(self):
         return self.__layer_name
         
     def set_link_learn_rule(self,rule):
         self.__link_learn_rule = rule
-    def get_layer_name(self):
+    def get_link_learn_rule(self):
         return self.__layer_name
         
     def setup(self):
@@ -95,3 +95,5 @@ class ANN():
             self.__link_learn_function = GeneralHebbLearning(self.__link_learn_rate, self.__link_learn_param)
         elif (self.__link_learn_rule == RULE.CLASSICAL):
             self.__link_learn_function = ClassicalHebbLearning(self.__link_learn_rate, self.__link_learn_param)
+            
+        return self

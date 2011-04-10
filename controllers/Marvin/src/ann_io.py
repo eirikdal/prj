@@ -1,8 +1,8 @@
-import ann_data
+from ann_data import ANN, TOPOLOGY, RULE
 import Layer
 
-class ann_io():
-    ann_data = ann_data.ANN()
+class ann_io:
+    __data = ANN()
     
     def read(self):
         file = open("ann.txt")
@@ -21,13 +21,10 @@ class ann_io():
             else:
                 self.__parse_exec_order(str[0])
                 
-        self.ann_data.setup()
-                
-    def get_ann_data(self):
-        return self.ann_data
+        return self.__ann_data.setup()
     
     def __init__(self):
-        self
+        self.__data = ANN()
         
     def __parse_exec_order(self,s):
         self.ann_data.add_exec_order(s)   
@@ -36,40 +33,40 @@ class ann_io():
         s = str.split(" ")
         
         if s[0] == "layer_name":
-            ann_data.set_layer_name(s[1])
+            self.__data.set_layer_name(s[1])
         elif s[0] == "layer_type":
-            ann_data.set_layer_type(s[1])
+            self.__data.set_layer_type(s[1])
         elif s[0] == "layer_size":
-            ann_data.set_layer_size(int(s[1]))
+            self.__data.set_layer_size(int(s[1]))
         elif s[0] == "layer_act_func":
             if s[1] == "sigmoid":
-                ann_data.set_layer_act_func(Layer.sigmoid)
+                self.__data.set_layer_act_func(Layer.sigmoid)
             elif s[1] == "dsigmoid":
-                ann_data.set_layer_act_func(Layer.dsigmoid)
+                self.__data.set_layer_act_func(Layer.dsigmoid)
         elif s[0] == "link_name_pre":
-            ann_data.set_link_name_pre(s[1])
+            self.__data.set_link_name_pre(s[1])
         elif s[0] == "link_name_post":
-            ann_data.set_link_name_post(s[1])
+            self.__data.set_link_name_post(s[1])
         elif s[0] == "link_conn_top":
             if s[1] == "full":
-                ann_data.set_link_conn_top(ann_data.TOPOLOGY.FULL)
+                self.__data.set_link_conn_top(TOPOLOGY.FULL)
             elif (s[0] == "oneone"):
-                ann_data.set_link_conn_top(ann_data.TOPOLOGY.ONEONE)
+                self.__data.set_link_conn_top(TOPOLOGY.ONEONE)
             elif s[0] == "triangular":
-                ann_data.set_link_conn_top(ann_data.TOPOLOGY.TRIANGULAR)
+                self.__data.set_link_conn_top(TOPOLOGY.TRIANGULAR)
             elif s[0] == "stochastic":
-                ann_data.set_link_conn_top(ann_data.TOPOLOGY.STOCHASTIC)
+                self.__data.set_link_conn_top(TOPOLOGY.STOCHASTIC)
         elif s[0] == "link_conn_prob":
-            ann_data.set_link_conn_prob(float(s[1]))
+            self.__data.set_link_conn_prob(float(s[1]))
         elif s[0] == "link_learn_rule":
             if s[1] == "general-hebb":
-                ann_data.set_link_learn_rule(ann_data.RULE.GENERAL)
+                self.__data.set_link_learn_rule(RULE.GENERAL)
             elif s[1] == "oja":
-                ann_data.set_link_learn_rule(ann_data.RULE.OJA)
+                self.__data.set_link_learn_rule(RULE.OJA)
         elif s[0] == "link_learn_param":
-            ann_data.set_link_learn_param(float(s[1]))
+            self.__data.set_link_learn_param(float(s[1]))
         elif s[0] == "link_learn_rate":
-            ann_data.set_link_learn_rate(float(s[1]))
+            self.__data.set_link_learn_rate(float(s[1]))
         elif s[0] == "link_range":
             t = s[1].split(",")
             (min,max) = (t[0],t[1])
