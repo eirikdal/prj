@@ -11,7 +11,7 @@ class GenericANN:
         io = ann_io.ann_io()
         __ann_data = io.read()
         
-        for i in range(__ann_data.get_layer_size()):
-            layer = Layer(__ann_data)
+        for ann_layer in __ann_data.get_layers():
+            layer = Layer(ann_layer)
             self.__layers.append(layer)
         

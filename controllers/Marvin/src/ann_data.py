@@ -14,25 +14,15 @@ class RULE:
     OJA=0
     GENERAL=1
 
-class ANN:
+class ANN_LAYER:
+    def __init__(self):
+        self
+        
     __layer_name = ""
     __layer_type = ""
     __layer_size = -1
     __layer_act_func = ACTIVATION.SIGMOID
     
-    __link_name_pre = ""
-    __link_name_post = ""
-    __link_conn_top = TOPOLOGY.ONEONE
-    __link_conn_prob = ""
-    __link_learn_rate = ""
-    __link_learn_rule = ""
-    __link_learn_param = 0.3
-    
-    range = (0,0)
-    
-    def __init__(self):
-        self
-        
     def set_layer_name(self,name):
         self.__layer_name = name
     def get_layer_name(self):
@@ -52,6 +42,25 @@ class ANN:
         self.__layer_act_func = act
     def get_layer_act_func(self):
         return self.__layer_name
+
+class ANN:
+    __layers = []
+    
+    __link_name_pre = ""
+    __link_name_post = ""
+    __link_conn_top = TOPOLOGY.ONEONE
+    __link_conn_prob = ""
+    __link_learn_rate = ""
+    __link_learn_rule = ""
+    __link_learn_param = 0.3
+    
+    range = (0,0)
+    
+    def __init__(self):
+        self
+    
+    def get_layers(self):
+        return self.__layers
     
     def set_link_name_pre(self,pre):
         self.__link_name_pre = pre

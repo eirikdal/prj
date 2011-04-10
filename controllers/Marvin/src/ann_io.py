@@ -1,8 +1,9 @@
-from ann_data import ANN, TOPOLOGY, RULE
+from ann_data import ANN, TOPOLOGY, RULE, ANN_LAYER
 import Layer
 
 class ann_io:
     __data = ANN()
+    __layer = ANN_LAYER()
     
     def read(self):
         file = open("ann.txt")
@@ -10,12 +11,19 @@ class ann_io:
         data = file.read()
         
         __exec_order = False
+        __new_layer = False
         
         while str in data.split():
             if str[0] == "begin" & str[1] == "exec_order":
                 __exec_order = True
+            elif str[0] == "begin" & str[1] == "layer":
+                __layer = Layer()
+                __new_layer = True
             elif str[0] == "end" & str[1] == "exec_order":
                 __exec_order = False
+            elif str[0] == "end" & str[1] == "layer":
+                self.__data.__layers.append(__layer)
+                __new_layer = False
             if not __exec_order:
                 self.__parse(str)
             else:
@@ -33,16 +41,16 @@ class ann_io:
         s = str.split(" ")
         
         if s[0] == "layer_name":
-            self.__data.set_layer_name(s[1])
+            self.__layer.set_layer_name(s[1])
         elif s[0] == "layer_type":
-            self.__data.set_layer_type(s[1])
+            self.__layer.set_layer_type(s[1])
         elif s[0] == "layer_size":
-            self.__data.set_layer_size(int(s[1]))
+            self.__layer.set_layer_size(int(s[1]))
         elif s[0] == "layer_act_func":
             if s[1] == "sigmoid":
-                self.__data.set_layer_act_func(Layer.sigmoid)
+                self.__layer.set_layer_act_func(Layer.sigmoid)
             elif s[1] == "dsigmoid":
-                self.__data.set_layer_act_func(Layer.dsigmoid)
+                self.__layer.set_layer_act_func(Layer.dsigmoid)
         elif s[0] == "link_name_pre":
             self.__data.set_link_name_pre(s[1])
         elif s[0] == "link_name_post":
