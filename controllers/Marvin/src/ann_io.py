@@ -2,9 +2,6 @@ import ann_data
 import Layer
 
 class ann_io():
-    def __init__(self):
-        self
-        
     ann_data = ann_data.ANN()
     
     def read(self):
@@ -19,16 +16,19 @@ class ann_io():
                 __exec_order = True
             elif str[0] == "end" & str[1] == "exec_order":
                 __exec_order = False
-            if not exec_order:
-                __parse(str)
-            else
-                __parse_exec_order(str[0])
+            if not __exec_order:
+                self.__parse(str)
+            else:
+                self.__parse_exec_order(str[0])
                 
         self.ann_data.setup()
                 
     def get_ann_data(self):
         return self.ann_data
     
+    def __init__(self):
+        self
+        
     def __parse_exec_order(self,s):
         self.ann_data.add_exec_order(s)   
     

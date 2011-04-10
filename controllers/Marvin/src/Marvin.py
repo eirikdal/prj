@@ -11,6 +11,7 @@
 #  from controller import *
 #from controller import Robot
 from epuck_basic import EpuckBasic
+from imagepro import column_avg
 
 # Here is the main class of your controller.
 # This class defines how to initialize and how to run your controller.
@@ -20,22 +21,30 @@ class Marvin (EpuckBasic):
     # User defined function for initializing and running
     # the Marvin class
     def run(self):
-    
+        ds = self.getDistanceSensor('Marvin')
+        ds.enable()
         # You should insert a getDevice-like function in order to get the
         # instance of a device of the robot. Something like:
-        led = self.getLed('ledname')
-        print "Hello, World!"
+        #  led = self.getLed('ledname')
+        '''
+        1. get_proximities(): vector with values from the 8 distance sensors
+        2. snapshot()
+        3. move, move_wheels, set_wheel_speeds
+        4. run_timestep, do_timed_action
+        '''
         # Main loop
         while True:
+      
             # Read the sensors:
             # Enter here functions to read sensor data, like:
-            #  val = ds.getValue()
-            
-            # Process sensor data here.
             val = ds.getValue()
+            img = self.snapshot()
+            img = column_avg(img)
+            # Process sensor data here.
+            
             # Enter here functions to send actuator commands, like:
-            led.set(1)
-            print val
+            #  led.set(1)
+            
             # Perform a simulation step of 64 milliseconds
             # and leave the loop when the simulation is over
             if self.step(64) == -1: break

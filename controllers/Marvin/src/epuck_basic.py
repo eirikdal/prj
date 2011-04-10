@@ -4,6 +4,7 @@ import time                # A Python primitive module
 import math                #   "            "
 import Image               # An extra Python module (that you'll have to download)
 import imagepro            # A module provided by Keith Downing for this assignment
+from prims1 import load_file_lines
 
 # This is the basic class for controlling an epuck robot in the Webots simulator.  In theory, the
 # same code can also run a physical epuck robot with just the "flip of a switch" - although there are small
@@ -263,7 +264,6 @@ class EpuckBasic (DifferentialWheels):
     def testrun(self):
         self.run_toy()
         self.stop_moving()
-	  
 
     def braitenburg_avoidance(self):
         sv = self.dist_sensor_values
@@ -281,40 +281,40 @@ class EpuckBasic (DifferentialWheels):
 # just for fun, and not used when controlling a robot via a neural network.
 
     def interp_command(self,string):
-      items = string.split() # Use white space to separate command and each arg
-      command = items[0]
-      args =[float(item) for item in items[1:]]
-      if command == 'quit':
-	  print "Ending the run."
-	  return False
-      if command == 'forward':
-	  self.forward(speed = 1.0, duration = args[0])
-      elif command == 'backward':
-	  self.backward(speed = 1.0, duration = args[0])
-      elif command == 'left':
-	  self.turn_left()
-      elif command =='right':
-	  self.turn_right()
-      elif command == 'spin':
-	  self.spin_angle(args[0])
-      elif command == 'snap':
-	  self.snapshot()
-      elif command == 'wait':
-	  self.wait(args[0])
-      elif command == 'help':
-	  help = "\nThe Legal Commands:\n"
-	  help += "   forward <duration in seconds> - Moves the robot forward.\n"
-	  help += "   backward <duration in seconds> - Moves the robot backward.\n"
-	  help += "   right - Turns the robot to the right.\n"
-	  help += "   left - Turns the robot to the left.\n"
-	  help += "   spin <angle in degrees> - Spins robot a given angle.\n"
-	  help += "   snap - Shows the camera image.\n"
-	  help += "   wait <duration in seconds> - robot does nothing for the specified period \n"
-	  help += "   quit - Quit this program.\n"
-	  print help 
-      else:
-	  print "Unknown command"
-      return True
+        items = string.split() # Use white space to separate command and each arg
+        command = items[0]
+        args =[float(item) for item in items[1:]]
+        if command == 'quit':
+            print "Ending the run."
+            return False
+        if command == 'forward':
+            self.forward(speed = 1.0, duration = args[0])
+        elif command == 'backward':
+            self.backward(speed = 1.0, duration = args[0])
+        elif command == 'left':
+            self.turn_left()
+        elif command =='right':
+            self.turn_right()
+        elif command == 'spin':
+            self.spin_angle(args[0])
+        elif command == 'snap':
+            self.snapshot()
+        elif command == 'wait':
+            self.wait(args[0])
+        elif command == 'help':
+            help = "\nThe Legal Commands:\n"
+            help += "   forward <duration in seconds> - Moves the robot forward.\n"
+            help += "   backward <duration in seconds> - Moves the robot backward.\n"
+            help += "   right - Turns the robot to the right.\n"
+            help += "   left - Turns the robot to the left.\n"
+            help += "   spin <angle in degrees> - Spins robot a given angle.\n"
+            help += "   snap - Shows the camera image.\n"
+            help += "   wait <duration in seconds> - robot does nothing for the specified period \n"
+            help += "   quit - Quit this program.\n"
+            print help 
+        else:
+            print "Unknown command"
+        return True
 
 # An action script is read from a file and then interpreted, line by line.  Each line will
 # correspond to a movement command.  The list of acceptable commands (shown in the big if statement of
@@ -322,18 +322,18 @@ class EpuckBasic (DifferentialWheels):
 # snapshots, etc.
 
     def run_action_script(self,fid = "action1"):
-      path = "data/" + fid + ".dat" 
-      lines = load_file_lines(path)
-      for l in lines:
-	  self.interp_command(l)
+        path = "data/" + fid + ".dat" 
+        lines = load_file_lines(path)
+        for l in lines:
+            self.interp_command(l)
 
     def run_toy(self):
-      result = True
-      print "Enter robot commands.  Type 'help for the command list and 'quit to stop"
-      while result:
-	  print "Command: "
-	  command = raw_input()
-	  result = self.interp_command(command)
+        result = True
+        print "Enter robot commands.  Type 'help for the command list and 'quit to stop"
+        while result:
+            print "Command: "
+            command = raw_input()
+            result = self.interp_command(command)
 
 
 # *** MAIN ****

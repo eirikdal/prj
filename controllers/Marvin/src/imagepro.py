@@ -37,18 +37,18 @@ def image_list(image): return list(image.getdata())
 # pixels are triples, whereas black-white or grayscale pixels consist of scalar values. 
 
 def pixel_error(p1,p2, vector = True):
-   if vector:
-      return  math.sqrt((p1[0] - p2[0])**2 + (p1[1] - p2[1])**2 + (p1[2] - p2[2])**2)
-   else:
-      return abs(p1 - p2)
+    if vector:
+        return  math.sqrt((p1[0] - p2[0])**2 + (p1[1] - p2[1])**2 + (p1[2] - p2[2])**2)
+    else:
+        return abs(p1 - p2)
 
 # This calculates an average pixel over an entire image.
 
 def avg_color(image, vector = True):
-   if vector:
-      return avg_rgb(image)
-   else:
-      return avg_scalar_color(image)
+    if vector:
+        return avg_rgb(image)
+    else:
+        return avg_scalar_color(image)
 
 # Calc avg r, g and b values over an entire image.
 def avg_rgb(image):
@@ -56,9 +56,9 @@ def avg_rgb(image):
     total = float(x*y)
     sum_r, sum_g, sum_b = 0.0, 0.0, 0.0
     for i in range(x):
-	for j in range(y):
-	    r,g,b = image.getpixel((i,j))
-	    sum_r, sum_g, sum_b = sum_r + r, sum_g + g, sum_b + b
+        for j in range(y):
+            r,g,b = image.getpixel((i,j))
+            sum_r, sum_g, sum_b = sum_r + r, sum_g + g, sum_b + b
     return [sum_r/total, sum_g/total, sum_b/total]
 
 # For scalar pixels
@@ -67,30 +67,30 @@ def avg_scalar_color(image):
     total = float(x*y)
     sum = 0.0
     for i in range(x):
-	for j in range(y):
-	    sum += image.getpixel((i,j))
+        for j in range(y):
+            sum += image.getpixel((i,j))
     return sum/total
 
 # Returns an array of average band strengths, one per column.  band = red, green, blue, gray or bw(black-white)
 def column_avg(image,band='red'):
-   x,y = image.size
-   func = eval("get_"+band)
-   a = kd_array.gen_array([x], init_elem = 0.0)
-   for i in range(x):
-      sum_band = 0
-      for j in range(y):
-         sum_band += func(image,i,j)
-      a[i] = float(sum_band)/float(y)
-   return a
+    x,y = image.size
+    func = eval("get_"+band)
+    a = kd_array.gen_array([x], init_elem = 0.0)
+    for i in range(x):
+        sum_band = 0
+        for j in range(y):
+            sum_band += func(image,i,j)
+        a[i] = float(sum_band)/float(y)
+    return a
 
 def image_avg(image,band='red',scale = 1.0):
-   return kd_array.vector_avg(column_avg(image,band=band)) / scale
+    return kd_array.vector_avg(column_avg(image,band=band)) / scale
 
 def scaled_column_avg(image,band='red',scale=256.0, target = 0.0, scaler = (lambda x, targ: x - targ)):
-   a = column_avg(image,band=band)
-   # print "column avgs: ", a
-   for i in range(a.size): a[i] = apply(scaler, [a[i]/scale , target])
-   return a
+    a = column_avg(image,band=band)
+    # print "column avgs: ", a
+    for i in range(a.size): a[i] = apply(scaler, [a[i]/scale , target])
+    return a
 
 # Apply func to each R,G,B triple of the image, returning an array of whatever type that func returns.
 # Note: Image module includes an "eval" method, which is similar, but it's function must take
@@ -99,7 +99,7 @@ def map_image(image,func):
     x,y = image.size
     a = kd_array.gen_array((x,y), init_elem = apply(func, [image.getpixel((0,0))]))
     for i in range(x):
-	for j in range(y):
-	    a[i,j] = apply(func, [image.getpixel((i,j))])
+        for j in range(y):
+            a[i,j] = apply(func, [image.getpixel((i,j))])
     return a
 
