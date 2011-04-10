@@ -27,16 +27,21 @@ class Marvin (EpuckBasic):
         self.ann = AnnPuck(agent = self, e_thresh = e_thresh, nvect = nvect, cvect = cvect, svect = svect, band = band, snapshow = snapshow,
                    concol = concol, ann_cycles = ann_cycles, agent_cycles = agent_cycles, act_noise = act_noise,
                    tfile = tfile)
+        
+        self.sensors = [self.getDistanceSensor('sensor' + str(i)) for i in range(8)]
+        for s in self.sensors: s.enable()
 
     def long_run(self,steps = 500):
         self.ann.simsteps = steps
         self.spin_angle(prims1.randab(0,360))
         self.ann.redman_run()
+        
+    def enter_input(self,sensors):
+        for s in sensors:
+            s.hallo()
     # User defined function for initializing and running
     # the Marvin class
     def run(self):
-        ds = self.getDistanceSensor('Marvin')
-        ds.enable()
         # You should insert a getDevice-like function in order to get the
         # instance of a device of the robot. Something like:
         #  led = self.getLed('ledname')
@@ -46,16 +51,21 @@ class Marvin (EpuckBasic):
         3. move, move_wheels, set_wheel_speeds
         4. run_timestep, do_timed_action
         '''
+
         # Main loop
         while True:
       
             # Read the sensors:
             # Enter here functions to read sensor data, like:
-            val = ds.getValue()
-            img = self.snapshot()
-            img = column_avg(img)
+            for s in self.sensors:
+                val = s.getValue()
+                simg = self.get_proximities()#self.snapshot()
+                pimg = self.snapshot(simg)
+                
+                self.show(pimg)
+                self.enter_input(s)
             # Process sensor data here.
-            
+            #self.enter_input(img)
             # Enter here functions to send actuator commands, like:
             #  led.set(1)
             
@@ -79,5 +89,6 @@ class Marvin (EpuckBasic):
 
 controller = Marvin()
 controller.basic_setup()
-controller.continuous_run()
+controller.run()
+#controller.continuous_run()
 #controller.run()

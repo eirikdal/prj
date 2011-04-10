@@ -15,9 +15,6 @@ def ol(x):
         return False
 
 class AgentANN(GenericANN):
-    __sensors = []
-    __motors = []
-    
     def __init__(self, sensors, motors):
         super()
         
