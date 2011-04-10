@@ -29,5 +29,5 @@ class WebAnn(epb.EpuckBasic):
 #*** MAIN ***
 # Webots expects a controller to be created and activated at the bottom of the controller file.
 
-controller = WebAnn(tempo = 1.0, band = 'gray')
-controller.long_run(40)
+#controller = WebAnn(tempo = 1.0, band = 'gray')
+#controller.long_run(40)

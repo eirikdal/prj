@@ -2,33 +2,11 @@ import ann_data
 import Layer
 
 class ann_io():
+    ann_data = ann_data.ANN()
+    
     def __init__(self):
         self
         
-    ann_data = ann_data.ANN()
-    
-    def read(self):
-        file = open("ann.txt")
-    
-        data = file.read()
-        
-        exec_order = False
-        
-        while str in data.split():
-            if str[0] == "begin" & str[1] == "exec_order":
-                exec_order = True
-            elif str[0] == "end" & str[1] == "exec_order":
-                exec_order = False
-            if not exec_order:
-                __parse(str)
-            else
-                __parse_exec_order(str[0])
-                
-        self.ann_data.setup()
-                
-    def get_ann_data(self):
-        return self.ann_data
-    
     def __parse_exec_order(self,s):
         self.ann_data.add_exec_order(s)   
     
@@ -73,6 +51,28 @@ class ann_io():
         elif s[0] == "link_range":
             t = s[1].split(",")
             (min,max) = (t[0],t[1])
+    
+    def read(self):
+        file = open("ann.txt")
+    
+        data = file.read()
+        
+        exec_order = False
+        
+        while str in data.split():
+            if str[0] == "begin" & str[1] == "exec_order":
+                exec_order = True
+            elif str[0] == "end" & str[1] == "exec_order":
+                exec_order = False
+            if not exec_order:
+                self.__parse(str)
+            else:
+                self.__parse_exec_order(str[0])
+                
+        self.ann_data.setup()
+                
+    def get_ann_data(self):
+        return self.ann_data
         
         
         

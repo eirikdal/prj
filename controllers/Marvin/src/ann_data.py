@@ -1,3 +1,4 @@
+from LearningRule import OjaLearning, ClassicalHebbLearning, GeneralHebbLearning
 
 class ACTIVATION:
     SIGMOID=1
@@ -67,6 +68,8 @@ class ANN():
         
     def setup(self):
         if (self.__link_learn_rule == RULE.OJA):
-            self.__link_learn_function = OjaRule(self.__link_learn_rate)
+            self.__link_learn_function = OjaLearning(self.__link_learn_rate)
+        elif (self.__link_learn_rule == RULE.GENERAL):
+            self.__link_learn_function = GeneralHebbLearning(self.__link_learn_rate, self.__link_learn_param)
         elif (self.__link_learn_rule == RULE.CLASSICAL):
-            self.__link_learn_function = GeneralHebbianRule(self.__link_learn_rate, self.__link_learn_param)
+            self.__link_learn_function = ClassicalHebbLearning(self.__link_learn_rate, self.__link_learn_param)
