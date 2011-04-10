@@ -42,10 +42,8 @@ class ANN_LAYER:
         self.__layer_act_func = act
     def get_layer_act_func(self):
         return self.__layer_name
-
-class ANN:
-    __layers = []
     
+class ANN_LINK:
     __link_name_pre = ""
     __link_name_post = ""
     __link_conn_top = TOPOLOGY.ONEONE
@@ -53,14 +51,7 @@ class ANN:
     __link_learn_rate = ""
     __link_learn_rule = ""
     __link_learn_param = 0.3
-    
-    range = (0,0)
-    
-    def __init__(self):
-        self
-    
-    def get_layers(self):
-        return self.__layers
+    __link_range = (0,1)
     
     def set_link_name_pre(self,pre):
         self.__link_name_pre = pre
@@ -96,7 +87,40 @@ class ANN:
         self.__link_learn_rule = rule
     def get_link_learn_rule(self):
         return self.__layer_name
+    
+    def set_link_range(self,(min,max)):
+        self.__link_range = (min,max)
+    def get_link_range(self):
+        return self.__link_range
+
+class ANN:
+    __layers = []
+    __links = []
+    __exec_order = []
+    
+    range = (0,0)
+    
+    def __init__(self):
+        self
+    
+    def add_link(self,link):
+        self.__links.append(link)
+    
+    def add_layer(self,layer):
+        self.__layers.append(layer)
         
+    def add_exec_order(self,order):
+        self.__exec_order.append(order)
+    
+    def get_links(self):
+        return self.__links
+    
+    def get_layers(self):
+        return self.__layers
+    
+    def get_exec_order(self):
+        return self.__exec_order        
+    '''
     def setup(self):
         if (self.__link_learn_rule == RULE.OJA):
             self.__link_learn_function = OjaLearning(self.__link_learn_rate)
@@ -106,3 +130,4 @@ class ANN:
             self.__link_learn_function = ClassicalHebbLearning(self.__link_learn_rate, self.__link_learn_param)
             
         return self
+    '''

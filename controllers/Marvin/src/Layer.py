@@ -8,11 +8,16 @@ def sigmoid(self, x):
 def dsigmoid(self, y):
     return 1.0 - y**2
 
+class TYPE:
+    INPUT = 0
+    HIDDEN = 1
+    OUTPUT = 2
+
 class Layer(object):
     __nodes = []
     __activation_function = sigmoid
     __name = ""
-    __type = ""
+    __type = TYPE.INPUT
     __size = 0
     __links_in = []
     __links_out = []
@@ -26,6 +31,9 @@ class Layer(object):
         self.__name = ann_layer.get_layer_name()
         self.__size = ann_layer.get_layer_size()
         self.__type = ann_layer.get_layer_type()
+    
+    def get_type(self):
+        return self.__type
     
     def add_link_in(self, link):
         self.__links_in.append(link)
