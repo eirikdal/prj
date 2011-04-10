@@ -19,7 +19,7 @@ class Layer(object):
     __max_settling_rounds = 0
     
     def __init__(self,ann_data):
-        self.activation_function = act
+        self.activation_function = ann_data.
     
     def add_link_in(self, link):
         self.links_in.append(link)

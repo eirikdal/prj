@@ -12,13 +12,13 @@ class ann_io():
     
         data = file.read()
         
-        exec_order = False
+        __exec_order = False
         
         while str in data.split():
             if str[0] == "begin" & str[1] == "exec_order":
-                exec_order = True
+                __exec_order = True
             elif str[0] == "end" & str[1] == "exec_order":
-                exec_order = False
+                __exec_order = False
             if not exec_order:
                 __parse(str)
             else

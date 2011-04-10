@@ -17,29 +17,28 @@ from epuck_basic import EpuckBasic
 # Note that this class derives EpuckBasic and so inherits all its functions
 class Marvin (EpuckBasic):
   
-  # User defined function for initializing and running
-  # the Marvin class
-  def run(self):
+    # User defined function for initializing and running
+    # the Marvin class
+    def run(self):
     
-    # You should insert a getDevice-like function in order to get the
-    # instance of a device of the robot. Something like:
-    #  led = self.getLed('ledname')
-    
-    # Main loop
-    while True:
-      
-      # Read the sensors:
-      # Enter here functions to read sensor data, like:
-      #  val = ds.getValue()
-      
-      # Process sensor data here.
-      
-      # Enter here functions to send actuator commands, like:
-      #  led.set(1)
-      
-      # Perform a simulation step of 64 milliseconds
-      # and leave the loop when the simulation is over
-      if self.step(64) == -1: break
+        # You should insert a getDevice-like function in order to get the
+        # instance of a device of the robot. Something like:
+        led = self.getLed('ledname')
+        print "Hello, World!"
+        # Main loop
+        while True:
+            # Read the sensors:
+            # Enter here functions to read sensor data, like:
+            #  val = ds.getValue()
+            
+            # Process sensor data here.
+            val = ds.getValue()
+            # Enter here functions to send actuator commands, like:
+            led.set(1)
+            print val
+            # Perform a simulation step of 64 milliseconds
+            # and leave the loop when the simulation is over
+            if self.step(64) == -1: break
     
     # Enter here exit cleanup code
 
