@@ -49,7 +49,7 @@ class Layer(object):
         return [node.getActivationLevel() for node in self.__nodes]
     
     def print_nodes(self):
-        print [node.getActivationLevel() for node in self.__nodes]    
+        print [node.getActivationLevel() for node in self.__nodes]
  
     def reset_nodes(self):
         for i in range(self.__nodes.__len__()):
