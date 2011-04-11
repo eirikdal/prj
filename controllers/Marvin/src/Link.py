@@ -99,11 +99,9 @@ class Link:
     
     def getOutWeights(self, node):
         sum = 0
-        #print "Link: len(arcs):", len(self.__arcs)
+
         for arc in self.__arcs:
-            #print "node: ", node, " other: ", arc.getPostNode()
-            if (arc.getPostNode() is node):
+            if arc.getPostNode() == node:
                 sum += arc.getPreNode().getActivationLevel() * arc.getCurrentWeight()
-                print sum
                 
         return sum
