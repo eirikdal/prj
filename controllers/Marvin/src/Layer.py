@@ -52,6 +52,7 @@ class Layer(object):
         return [node.getActivationLevel() for node in self.__nodes]
     
     def print_nodes(self):
+        print "nodes of layer ",self.__name
         print [node.getActivationLevel() for node in self.__nodes]
  
     def reset_nodes(self):
@@ -75,42 +76,41 @@ class Layer(object):
     
     def add_link_in(self, link):
         self.__links_in.append(link)
+    def get_linksin(self):
+        return self.__links_in
     
     def add_link_out(self,link):
         self.__links_out.append(link)
+    def get_linksout(self):
+        return self.__links_out
         
     def set_max_settlings_rounds(self, i):
         self.__max_settling_rounds = i
         
     def add_node(self, node):
         self.__nodes.append(node)
+    def remove_node(self, node):
+        self.__nodes.remove(node)
+    def get_nodes(self):
+        return self.__nodes
         
     def set_active(self, active):
         self.__active_mode = active
-        
     def is_active(self):
         return self.__active_mode
     
     def is_learning(self):
         return self.__learning_mode
-    
     def set_learning(self, learning):
         self.__learning_mode = learning
         
     def set_quiescent(self,quiescent):
         self.__quiescent_mode = quiescent
-    
     def get_quiescent(self):
         return self.__quiescent_mode
     
-    def get_linksout(self):
-        return self.__links_out
-    
-    def get_nodes(self):
-        return self.__nodes
-    
     def get_name(self):
         return self.__name
-    
-    def remove_node(self, node):
-        self.__nodes.remove(node)
+
+    def set_target_data(self, data):
+        self.__targetData = data

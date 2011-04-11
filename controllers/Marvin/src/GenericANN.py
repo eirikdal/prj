@@ -25,6 +25,7 @@ class GenericANN:
         print "GenericANN: Begin read from script"
         io = ann_io()
         __ann_data = io.read()
+        # TODO read training data
         
         print "GenericANN: ", len(__ann_data.get_layers())
         
@@ -66,7 +67,21 @@ class GenericANN:
         
         self.__exec_order = __ann_data.get_exec_order()
         
+    def do_training(self):
+        print "Training"
         
+        for data in self.__training_data:
+            self.getLastLayer().set_target_data(data)
+        
+    def getFirstLayer(self):
+        for layer in self.__layers:
+            if (len(layer.get_linksin()) == 0):
+                return layer
+            
+    def getLastLayer(self):
+        for layer in self.__layers:
+            if (len(layer.get_linksout()) == 0):
+                return layer
     def execute(self):
         print "GenericANN: Executing layers in order:", self.__exec_order
         for name in self.__exec_order:

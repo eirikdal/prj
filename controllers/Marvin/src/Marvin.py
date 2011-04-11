@@ -63,6 +63,8 @@ class Marvin (EpuckBasic):
         #pimg = self.snapshot(True)
         #print "proximities: "
         #print self.get_proximities()
+        
+        self.ann.do_training()
 
         # Main loop
         while True:

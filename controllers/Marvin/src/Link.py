@@ -70,6 +70,10 @@ class Link:
                     arc.setCurrentWeight(arc.getCurrentWeight() + \
                         self.__learningRule.getWeightChange(arc.getPreNode(), arc.getPostNode(), arc.getCurrentWeight()))
         
+    def doBackPropagation(self):
+        #back propagation
+        
+        
     def getArcs(self):
         return self.__arcs
     
@@ -101,7 +105,7 @@ class Link:
         sum = 0
 
         for arc in self.__arcs:
-            if arc.getPostNode() == node:
+            if arc.getPostNode() == node: 
                 sum += arc.getPreNode().getActivationLevel() * arc.getCurrentWeight()
                 
         return sum
