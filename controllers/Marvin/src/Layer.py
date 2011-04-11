@@ -40,6 +40,9 @@ class Layer(object):
             self.__nodes[i].setMembranePotential(float(input[i]))
             self.__nodes[i].setActivationLevel(float(input[i]))
             
+    def get_output(self):
+        return [node.getActivationLevel() for node in self.__nodes]
+            
     def reset_nodes(self):
         for i in range(self.__nodes.__len__()):
             self.__nodes[i].reset()
