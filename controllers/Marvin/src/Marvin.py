@@ -14,6 +14,7 @@ from epuck_basic import EpuckBasic
 from imagepro import column_avg
 from Layer import TYPE
 from AnnPuck import AnnPuck
+from ann_io import read_training_data
 import prims1
 
 # Here is the main class of your controller.
@@ -40,6 +41,7 @@ class Marvin (EpuckBasic):
         #print sensors
         for layer in self.ann.get_layers():
             if layer.get_type() == TYPE.INPUT:
+                sensors = map(lambda(x): x/4e3, sensors)
                 layer.init_input(sensors)
                 
     def get_output(self):
@@ -65,7 +67,7 @@ class Marvin (EpuckBasic):
         #pimg = self.snapshot(True)
         #print "proximities: "
         #print self.get_proximities()
-
+        training_data = read_training_data()
         # Main loop
         while True:
       

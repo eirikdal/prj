@@ -2,6 +2,22 @@ from ann_data import ANN, TOPOLOGY, RULE, ANN_LAYER, ANN_LINK
 from Layer import TYPE
 import Layer
 
+def read_training_data():
+    file = open("training.txt")
+    
+    data = file.read()
+    
+    print "training_io: Begin parsing training data"
+    
+    training_data = []
+    for strdat in data.split('\n'):
+        str = strdat.split()
+        if not str: continue
+        
+        training_data.append(([str[i] for i in range(len(str)-2)],[str[i] in range(len(str)-2,len(str))]))
+    
+    return training_data
+
 class ann_io:    
     def read(self):
         file = open("ann.txt")
