@@ -13,6 +13,7 @@ class TOPOLOGY:
 class RULE:
     OJA=0
     GENERAL=1
+    CLASSICAL=2
 
 class ANN_LAYER:
     def __init__(self):
@@ -119,15 +120,4 @@ class ANN:
         return self.__layers
     
     def get_exec_order(self):
-        return self.__exec_order        
-    '''
-    def setup(self):
-        if (self.__link_learn_rule == RULE.OJA):
-            self.__link_learn_function = OjaLearning(self.__link_learn_rate)
-        elif (self.__link_learn_rule == RULE.GENERAL):
-            self.__link_learn_function = GeneralHebbLearning(self.__link_learn_rate, self.__link_learn_param)
-        elif (self.__link_learn_rule == RULE.CLASSICAL):
-            self.__link_learn_function = ClassicalHebbLearning(self.__link_learn_rate, self.__link_learn_param)
-            
-        return self
-    '''
+        return self.__exec_order

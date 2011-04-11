@@ -25,7 +25,7 @@ class Layer(object):
     __learning_mode = False
     __quiescent_mode = False
     __active_mode = False #Indicating whether or not the layer is currently able to a) update its neuron activation levels, and b) send those signals downstream neurons
-    __max_settling_rounds = 0
+    __max_settling_rounds = 1
     
     def __init__(self,ann_layer):
         self.__activation_function = ann_layer.get_layer_act_func()
@@ -82,3 +82,9 @@ class Layer(object):
     
     def get_nodes(self):
         return self.__nodes
+    
+    def get_name(self):
+        return self.__name
+    
+    def remove_node(self, node):
+        self.__nodes.remove(node)
