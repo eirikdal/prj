@@ -6,11 +6,15 @@ from Link import Link
 from LearningRule import OjaLearning, ClassicalHebbLearning, GeneralHebbLearning
 from ann_data import RULE
 
-class GenericANN:
-    __ann_data = ANN()
-    __layers = []
-    __links = []
-    __exec_order = []
+class GenericANN: 
+    def get_layers(self):
+        return self.__layers
+    
+    def get_links(self):
+        return self.__links
+    
+    def get_exec_order(self):
+        return self.__exec_order
     
     def __init__(self):
         io = ann_io.ann_io()

@@ -37,7 +37,7 @@ class Marvin (EpuckBasic):
         self.ann.redman_run()
         
     def enter_input(self,sensors):
-        for layer in self.ann.__layers:
+        for layer in self.ann.get_layers():
             if layer.get_type() == TYPE.INPUT:
                 layer.init_input(sensors)
                 
