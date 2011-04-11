@@ -67,6 +67,7 @@ class GenericANN:
                 if layer.get_name() == name:
                     print "GenericANN: Executing layer: " + layer.get_name()
                     layer.execute()
+                    layer.print_nodes()
                     break
                 
         for link in self.__links:

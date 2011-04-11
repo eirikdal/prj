@@ -59,9 +59,11 @@ class Layer(object):
         __sum = 0
         print "Layer: Executing layer: " + self.get_name()
         if(not self.__quiescent_mode and self.__active_mode and self.__learning_mode):
-            for node in self.nodes:
+            for node in self.__nodes:
+                print "Layer: num links: ", len(self.__links_in)
                 for link in self.__links_in:
-                    __sum += link.getOutWeights(node);
+                    __sum += link.getOutWeights(node)
+                print "Layer: ", __sum
                 node.setMembranePotential(__sum)
                 node.setActivationLevel(self.__activation_function(__sum))
   
