@@ -60,7 +60,7 @@ class Link:
                         arc = Arc(pre, post, weight, self)
                         self.__arcs.append(arc)
         elif (self.__connectionType == TOPOLOGY.TRIANGULAR):
-             for i in range(self.__preLayer.get_nodes()):
+            for i in range(self.__preLayer.get_nodes()):
                 for j in range(self.__postLayer.get_nodes()):
                     if (not (i == j)):
                         weight = random.uniform(self.__minWeight, self.__maxWeight)
