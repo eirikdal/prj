@@ -29,5 +29,6 @@ class GenericANN:
             for layer in self.__layers:
                 if layer.get_name() == name:
                     layer.execute()
-                    #link.update()
+                    for link in layer.get_linksout():
+                        link.update()
                     break

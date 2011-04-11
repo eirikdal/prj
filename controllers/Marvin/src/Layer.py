@@ -46,14 +46,14 @@ class Layer(object):
         
     def execute(self):
         __sum = 0
-        if self.__active_mode:
-            for i in range(self.__max_settling_rounds):
-                for i in range(self.nodes):
-                    for j in range(self.__links_in):
-                        __sum += self.nodes[i] * self.__links_in[i];
-                    for j in range(self.__links_out):
-                        self.__links_out[j] = self.__activation_function(__sum)
-    
+        
+        if(not self.__quiescent_mode and self.__active_mode and self.__learning_mode):
+            for node in self.nodes:
+                for link in self.__links_in:
+                    __sum += link.getOutWeights(node);
+                node.setMembranePotential(__sum)
+                node.setActivationLevel(self.__activation_function(__sum))
+  
     def get_type(self):
         return self.__type
     
@@ -86,3 +86,9 @@ class Layer(object):
     
     def get_quiescent(self):
         return self.__quiescent_mode
+    
+    def get_linksout(self):
+        return self.__links_out
+    
+    def get_nodes(self):
+        return self.__nodes
