@@ -28,7 +28,9 @@ class Link:
                 for post in self.__postLayer.get_nodes():
                     weight = random.uniform(self.__minWeight, self.__maxWeight)
                     arc = Arc(pre, post, weight, self)
+                    print "connecting ",pre," of ",pre.getLayer(), "(",pre.getLayer().get_name(),") to ", post, " of ",post.getLayer(), "(",post.getLayer().get_name(),")"
                     self.__arcs.append(arc)
+            self.__postLayer.printNodes()
         elif (self.__connectionType == TOPOLOGY.ONEONE):
             for i in range(self.__preLayer.get_nodes()):
                 weight = random.uniform(self.__minWeight, self.__maxWeight)
@@ -99,9 +101,8 @@ class Link:
         sum = 0
         #print "Link: len(arcs):", len(self.__arcs)
         for arc in self.__arcs:
-            print arc.getPostNode()
-            print node
-            if (arc.getPostNode() == node):
+            #print "node: ", node, " other: ", arc.getPostNode()
+            if (arc.getPostNode() is node):
                 sum += arc.getPreNode().getActivationLevel() * arc.getCurrentWeight()
                 print sum
                 

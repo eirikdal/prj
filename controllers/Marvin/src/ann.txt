@@ -42,7 +42,6 @@ link_range 0,10
 end link
 
 begin exec_order
-sensors 0
-hidden 1
-motors 2
+hidden 0
+motors 1
 end exec_order

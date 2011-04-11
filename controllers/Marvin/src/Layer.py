@@ -38,6 +38,9 @@ class Layer(object):
         print "Active mode: ", self.__active_mode
         print "Number of nodes: ", self.__size
         
+    def printNodes(self):
+        print [self.__nodes]
+        
     def init_input(self,input):
         for i in range(len(input)):
             self.__nodes[i].setMembranePotential(float(input[i]))
@@ -63,7 +66,6 @@ class Layer(object):
                 #print "Layer: num links: ", len(self.__links_in)
                 for link in self.__links_in:
                     __sum += link.getOutWeights(node)
-                print "Layer: ", __sum
                 node.setMembranePotential(__sum)
                 node.setActivationLevel(self.__activation_function(__sum))
         
