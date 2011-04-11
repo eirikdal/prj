@@ -6,7 +6,6 @@ from Link import Link
 from LearningRule import OjaLearning, ClassicalHebbLearning, GeneralHebbLearning
 from ann_data import RULE
 
-
 class GenericANN:
     __ann_data = ANN()
     __layers = []
