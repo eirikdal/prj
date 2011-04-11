@@ -20,9 +20,9 @@ class Layer(object):
         self.__nodes = []
         self.__links_in = []
         self.__links_out = []
-        self.__learning_mode = False
-        self.__quiescent_mode = False
-        self.__active_mode = False #Indicating whether or not the layer is currently able to a) update its neuron activation levels, and b) send those signals downstream neurons
+        self.__learning_mode = True
+        self.__quiescent_mode = True
+        self.__active_mode = True #Indicating whether or not the layer is currently able to a) update its neuron activation levels, and b) send those signals downstream neurons
         self.__max_settling_rounds = 1
         self.__activation_function = ann_layer.get_layer_act_func()
         self.__name = ann_layer.get_layer_name()
