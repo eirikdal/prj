@@ -74,3 +74,15 @@ class Layer(object):
         
     def is_active(self):
         return self.__active_mode
+    
+    def is_learning(self):
+        return self.__learning_mode
+    
+    def set_learning(self, learning):
+        self.__learning_mode = learning
+        
+    def set_quiescent(self,quiescent):
+        self.__quiescent_mode = quiescent
+    
+    def get_quiescent(self):
+        return self.__quiescent_mode

@@ -1,11 +1,14 @@
+from ann_data import TOPOLOGY
+
 class Link:
-    __arcs = [] # 2-dimensional array for arcs
+    __arcs = [] # 2-dimensional array for arcs, TODO why 2D ?
     __preLayer = [] # pre-synaptic Layer
     __postLayer = [] # post-synaptic Layer
-    __connectionType = ConnectionType.FULL
+    __connectionType = TOPOLOGY.FULL
     __minWeight = 0
     __maxWeight = 0
     __learningRule = [] # subclass of LearningFunction
+    __learning_mode = False
     
     def __init__(self, arcs, preLayer, postLayer, connection, minWeight, maxWeight, learningRule):
         self.__arcs = arcs
@@ -15,6 +18,15 @@ class Link:
         self.__minWeight = minWeight
         self.__preLayer = preLayer
         self.__postLayer = postLayer
+        
+    def update(self):
+        # in order for plasticity to occur:
+        # post-synaptic layer and link of an arc must be in learning mode
+        if (self.__learning_mode == True):
+            for arc in self.__arcs:
+                if (arc.getPreNode().getLayer().is_active() and arc.getPreNode().getLayer().is_learning()):
+                    arc.setCurrentWeight(arc.getCurrentWeight() + \
+                        self.__learningRule.getWeightChange(arc.getPreNode(), arc.getPostNode(), arc.getCurrentWeight()))
         
     def getArcs(self):
         return self.__arcs
@@ -36,15 +48,3 @@ class Link:
     
     def getMinWeight(self):
         return self.__minWeight
-    
-class ConnectionType:
-    FULL = 0 # all pre-synaptic nodes synapse upon all post-synaptic nodes
-    ONE_ONE = 1 # pre-synaptic nodes only connect to a single post-synaptic node
-                # if layers are the same, every node connects to itself
-    STOCHASTIC = 2 # connection assignment with probability
-    TRIANGULAR = 3 # connection to all post-nodes except the node itself
-    
-class LearningRule:
-    CLASSICAL_HEBB = 0
-    GENENERAL_HEBB = 1
-    OJA = 2

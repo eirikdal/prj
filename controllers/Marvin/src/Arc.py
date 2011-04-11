@@ -36,7 +36,10 @@ class Arc:
     def setPostNode(self, postNode):
         self.__postNode = postNode
                 
-    def setWeight(self,weight):
+    def setCurrentWeight(self,weight):
+        self.__currentWeight = weight
+        
+    def setInitialWeight(self,weight):
         self.__currentWeight = weight
         self.__initialWeight = weight
         
