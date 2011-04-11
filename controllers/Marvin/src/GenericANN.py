@@ -48,9 +48,9 @@ class GenericANN:
             # Adding links to layers
             for layer in self.get_layers():
                 if link.getPostLayer().get_name() == layer.get_name():
-                    layer.add_link_out(link)
-                elif link.getPreLayer().get_name() == layer.get_name():
                     layer.add_link_in(link)
+                elif link.getPreLayer().get_name() == layer.get_name():
+                    layer.add_link_out(link)
             
             print "GenericANN: Adding link from: " + link.getPreLayer().get_name() + " to: " + \
                       link.getPostLayer().get_name()
