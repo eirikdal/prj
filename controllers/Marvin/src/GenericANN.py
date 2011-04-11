@@ -55,13 +55,15 @@ class GenericANN:
                 link.setLearningRule(ClassicalHebbLearning(ann_link.get_link_learn_rate()))
                 
             link.connect()
-            
-        __exec_order = __ann_data.get_exec_order()
+        
+        self.__exec_order = __ann_data.get_exec_order()
         
         
     def execute(self):
+        print "GenericANN: Executing layers in order:", self.__exec_order
         for name in self.__exec_order:
             for layer in self.__layers:
+                #print layer.get_name() + "=" + name
                 if layer.get_name() == name:
                     print "GenericANN: Executing layer: " + layer.get_name()
                     layer.execute()

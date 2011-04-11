@@ -38,7 +38,6 @@ class Marvin (EpuckBasic):
         
     def enter_input(self,sensors):
         for layer in self.ann.get_layers():
-            print "name: " + layer.get_name()
             if layer.get_type() == TYPE.INPUT:
                 layer.init_input(sensors)
                 
@@ -46,7 +45,7 @@ class Marvin (EpuckBasic):
         for layer in self.ann.get_layers():
             if layer.get_type() == TYPE.OUTPUT:
                 return layer.get_output()
-                
+    
     # User defined function for initializing and running
     # the Marvin class
     def run(self):
@@ -62,8 +61,8 @@ class Marvin (EpuckBasic):
         
         #print self.get_proximities()
         #pimg = self.snapshot(True)
-        print "proximities: "
-        print self.get_proximities()
+        #print "proximities: "
+        #print self.get_proximities()
 
         # Main loop
         while True:
@@ -75,7 +74,7 @@ class Marvin (EpuckBasic):
             sens = self.get_proximities()
             self.enter_input(sens)
             self.ann.execute()
-            self.get_output()
+            print self.get_output()
             
             # Process sensor data here.
             #self.enter_input(img)

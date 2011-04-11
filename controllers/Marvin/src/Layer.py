@@ -42,17 +42,22 @@ class Layer(object):
         for i in range(len(input)):
             self.__nodes[i].setMembranePotential(float(input[i]))
             self.__nodes[i].setActivationLevel(float(input[i]))
+        print "Layer: Input layer:"
+        self.print_nodes()
             
     def get_output(self):
         return [node.getActivationLevel() for node in self.__nodes]
-            
+    
+    def print_nodes(self):
+        print [node.getActivationLevel() for node in self.__nodes]    
+ 
     def reset_nodes(self):
         for i in range(self.__nodes.__len__()):
             self.__nodes[i].reset()
         
     def execute(self):
         __sum = 0
-        print "executing layer: " + self.get_name()
+        print "Layer: Executing layer: " + self.get_name()
         if(not self.__quiescent_mode and self.__active_mode and self.__learning_mode):
             for node in self.nodes:
                 for link in self.__links_in:

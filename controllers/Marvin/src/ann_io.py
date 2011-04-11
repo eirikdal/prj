@@ -20,23 +20,30 @@ class ann_io:
                 continue
             if str[0] == "begin" and str[1] == "exec_order":
                 __exec_order = True
+                continue
             elif str[0] == "begin" and str[1] == "layer":
                 self.__layer = ANN_LAYER()
                 __new_layer = True
+                continue
             elif str[0] == "begin" and str[1] == "link":
                 self.__link = ANN_LINK()
                 __new_link = True
+                continue
             elif str[0] == "end" and str[1] == "exec_order":
                 __exec_order = False
+                continue
             elif str[0] == "end" and str[1] == "layer":
                 self.__data.add_layer(self.__layer)
                 __new_layer = False
+                continue
             elif str[0] == "end" and str[1] == "link":
                 self.__data.add_link(self.__link)
                 __new_link = False
+                continue
             if not __exec_order:
                 self.__parse(str)
             else:
+                print str[0]
                 self.__parse_exec_order(str[0])
                 
         return self.__data
