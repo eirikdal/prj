@@ -37,12 +37,12 @@ class ANN_LAYER:
     def set_layer_size(self,size):
         self.__layer_size = size
     def get_layer_size(self):
-        return self.__layer_name
+        return self.__layer_size
     
     def set_layer_act_func(self,act):
         self.__layer_act_func = act
     def get_layer_act_func(self):
-        return self.__layer_name
+        return self.__layer_act_func
     
 class ANN_LINK:
     __link_name_pre = ""
@@ -57,37 +57,37 @@ class ANN_LINK:
     def set_link_name_pre(self,pre):
         self.__link_name_pre = pre
     def get_link_name_pre(self):
-        return self.__layer_name
+        return self.__link_name_pre
     
     def set_link_name_post(self,post):
         self.__link_name_post = post
     def get_link_name_post(self):
-        return self.__layer_name
+        return self.__link_name_post
     
     def set_link_conn_top(self,top):
         self.__link_conn_top = top
     def get_link_conn_top(self):
-        return self.__layer_name
+        return self.__link_conn_top
         
     def set_link_conn_prob(self,prob):
         self.__link_conn_prob = prob
     def get_link_conn_prob(self):
-        return self.__layer_name
+        return self.__link_conn_prob
     
     def set_link_learn_rate(self,rate):
         self.__link_learn_rate = rate
     def get_link_learn_rate(self):
-        return self.__layer_name
+        return self.__link_learn_rate
         
     def set_link_learn_param(self,param):
         self.__link_learn_param = param
     def get_link_learn_param(self):
-        return self.__layer_name
+        return self.__link_learn_param
         
     def set_link_learn_rule(self,rule):
         self.__link_learn_rule = rule
     def get_link_learn_rule(self):
-        return self.__layer_name
+        return self.__link_learn_rule
     
     def set_link_range(self,(min,max)):
         self.__link_range = (min,max)

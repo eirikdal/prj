@@ -16,7 +16,7 @@ def ol(x):
 
 class AgentANN(GenericANN):
     def __init__(self):
-        
+        print "AgentANN constructor called"
         #input_layers = filter(il,self.__layers)
         #output_layers = filter(ol,self.__layers)
         

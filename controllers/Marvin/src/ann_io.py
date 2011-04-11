@@ -7,44 +7,55 @@ class ann_io:
         file = open("ann.txt")
     
         data = file.read()
-        
+
         __exec_order = False
         __new_layer = False
         __new_link = False
         
-        while str in data.split():
-            if str[0] == "begin" & str[1] == "exec_order":
+        print "ann_io: Begin parsing script"
+
+        for strdat in data.split('\n'):
+            str = strdat.split()
+            if not str:
+                continue
+            if str[0] == "begin" and str[1] == "exec_order":
                 __exec_order = True
-            elif str[0] == "begin" & str[1] == "layer":
-                __layer = ANN_LAYER()
+                continue
+            elif str[0] == "begin" and str[1] == "layer":
+                self.__layer = ANN_LAYER()
                 __new_layer = True
-            elif str[0] == "begin" & str[1] == "link":
-                __link = ANN_LINK()
+                continue
+            elif str[0] == "begin" and str[1] == "link":
+                self.__link = ANN_LINK()
                 __new_link = True
-            elif str[0] == "end" & str[1] == "exec_order":
+                continue
+            elif str[0] == "end" and str[1] == "exec_order":
                 __exec_order = False
-            elif str[0] == "end" & str[1] == "layer":
-                self.__data.add_layer(__layer)
+                continue
+            elif str[0] == "end" and str[1] == "layer":
+                self.__data.add_layer(self.__layer)
                 __new_layer = False
-            elif str[0] == "end" & str[1] == "link":
-                self.__data.add_link(__link)
+                continue
+            elif str[0] == "end" and str[1] == "link":
+                self.__data.add_link(self.__link)
                 __new_link = False
+                continue
             if not __exec_order:
                 self.__parse(str)
             else:
+                print str[0]
                 self.__parse_exec_order(str[0])
                 
         return self.__data
     
     def __init__(self):
+        print "ann_io constructor called"
         self.__data = ANN()
         
     def __parse_exec_order(self,s):
         self.__data.add_exec_order(s)   
     
-    def __parse(self,str):
-        s = str.split(" ")
-        
+    def __parse(self,s): 
         if s[0] == "layer_name":
             self.__layer.set_layer_name(s[1])
         elif s[0] == "layer_type":

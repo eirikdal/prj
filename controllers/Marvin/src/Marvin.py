@@ -45,7 +45,7 @@ class Marvin (EpuckBasic):
         for layer in self.ann.get_layers():
             if layer.get_type() == TYPE.OUTPUT:
                 return layer.get_output()
-                
+    
     # User defined function for initializing and running
     # the Marvin class
     def run(self):
@@ -60,10 +60,10 @@ class Marvin (EpuckBasic):
         '''
         
         #print self.get_proximities()
-        pimg = self.snapshot(True)
-        print "proximities"
-        simg = self.get_proximities()
-        print simg
+        #pimg = self.snapshot(True)
+        #print "proximities: "
+        #print self.get_proximities()
+
         # Main loop
         while True:
       
