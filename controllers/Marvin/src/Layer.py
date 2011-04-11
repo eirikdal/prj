@@ -21,7 +21,7 @@ class Layer(object):
         self.__links_in = []
         self.__links_out = []
         self.__learning_mode = True
-        self.__quiescent_mode = True
+        self.__quiescent_mode = False
         self.__active_mode = True #Indicating whether or not the layer is currently able to a) update its neuron activation levels, and b) send those signals downstream neurons
         self.__max_settling_rounds = 1
         self.__activation_function = ann_layer.get_layer_act_func()
@@ -60,10 +60,10 @@ class Layer(object):
         print "Layer: Executing layer: " + self.get_name()
         if(not self.__quiescent_mode and self.__active_mode and self.__learning_mode):
             for node in self.__nodes:
-                print "Layer: num links: ", len(self.__links_in)
+                #print "Layer: num links: ", len(self.__links_in)
                 for link in self.__links_in:
                     __sum += link.getOutWeights(node)
-                #print "Layer: ", __sum
+                print "Layer: ", __sum
                 node.setMembranePotential(__sum)
                 node.setActivationLevel(self.__activation_function(__sum))
         
