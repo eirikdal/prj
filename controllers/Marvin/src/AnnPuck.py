@@ -1,4 +1,4 @@
-import AgentANN
+from AgentANN import AgentANN
 
 '''
 This is the interface to the WebANN class.
@@ -19,6 +19,4 @@ class AnnPuck(AgentANN):
         self.ann_cycles = ann_cycles
         self.agent_cycles = agent_cycles
         self.act_noise = act_noise
-        
-        super()
         

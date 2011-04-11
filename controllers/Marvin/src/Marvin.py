@@ -12,7 +12,7 @@
 #from controller import Robot
 from epuck_basic import EpuckBasic
 from imagepro import column_avg
-
+from Layer import TYPE
 from AnnPuck import AnnPuck
 import prims1
 
@@ -28,8 +28,8 @@ class Marvin (EpuckBasic):
                    concol = concol, ann_cycles = ann_cycles, agent_cycles = agent_cycles, act_noise = act_noise,
                    tfile = tfile)
         
-        self.sensors = [self.getDistanceSensor('sensor' + str(i)) for i in range(8)]
-        for s in self.sensors: s.enable()
+        self.sensors = [self.getDistanceSensor('ps' + str(i)) for i in range(8)]
+        for s in self.sensors: s.enable(int(self.getBasicTimeStep()))
 
     def long_run(self,steps = 500):
         self.ann.simsteps = steps
@@ -37,8 +37,10 @@ class Marvin (EpuckBasic):
         self.ann.redman_run()
         
     def enter_input(self,sensors):
-        for s in sensors:
-            s.hallo()
+        for layer in self.ann.__layers:
+            if layer.get_type() == TYPE.INPUT:
+                layer.init_input(sensors)
+                
     # User defined function for initializing and running
     # the Marvin class
     def run(self):
@@ -51,19 +53,22 @@ class Marvin (EpuckBasic):
         3. move, move_wheels, set_wheel_speeds
         4. run_timestep, do_timed_action
         '''
-
+        
+        #print self.get_proximities()
+        pimg = self.snapshot(True)
+        print "proximities"
+        simg = self.get_proximities()
+        print simg
         # Main loop
         while True:
       
             # Read the sensors:
             # Enter here functions to read sensor data, like:
-            for s in self.sensors:
-                val = s.getValue()
-                simg = self.get_proximities()#self.snapshot()
-                pimg = self.snapshot(simg)
-                
-                self.show(pimg)
-                self.enter_input(s)
+            #for s in self.sensors:
+                #val = s.getValue()
+            sens = self.get_proximities()
+            self.enter_input(sens)
+
             # Process sensor data here.
             #self.enter_input(img)
             # Enter here functions to send actuator commands, like:
@@ -76,12 +81,6 @@ class Marvin (EpuckBasic):
     # Enter here exit cleanup code
 
 # The main program starts from here
-
-# This is the main program of your controller.
-# It creates an instance of your Robot subclass, launches its
-# function(s) and destroys it at the end of the execution.
-# Note that only one instance of Robot should be created in
-# a controller program.
 
 #from webann.py:
 #controller = WebAnn(tempo = 1.0, band = 'gray')
