@@ -4,10 +4,10 @@ from ann_data import ANN_LAYER
 from Node import Node
 from LearningRule import LearningFunction
 
-def sigmoid(self, x):
+def sigmoid(x):
     return math.tanh(x)
 
-def dsigmoid(self, y):
+def dsigmoid(y):
     return 1.0 - y**2
 
 class TYPE:
@@ -20,9 +20,9 @@ class Layer(object):
         self.__nodes = []
         self.__links_in = []
         self.__links_out = []
-        self.__learning_mode = False
+        self.__learning_mode = True
         self.__quiescent_mode = False
-        self.__active_mode = False #Indicating whether or not the layer is currently able to a) update its neuron activation levels, and b) send those signals downstream neurons
+        self.__active_mode = True #Indicating whether or not the layer is currently able to a) update its neuron activation levels, and b) send those signals downstream neurons
         self.__max_settling_rounds = 1
         self.__activation_function = ann_layer.get_layer_act_func()
         self.__name = ann_layer.get_layer_name()
@@ -63,9 +63,10 @@ class Layer(object):
                 print "Layer: num links: ", len(self.__links_in)
                 for link in self.__links_in:
                     __sum += link.getOutWeights(node)
-                print "Layer: ", __sum
+                #print "Layer: ", __sum
                 node.setMembranePotential(__sum)
                 node.setActivationLevel(self.__activation_function(__sum))
+        
   
     def get_type(self):
         return self.__type
