@@ -41,6 +41,11 @@ class Marvin (EpuckBasic):
             if layer.get_type() == TYPE.INPUT:
                 layer.init_input(sensors)
                 
+    def get_output(self):
+        for layer in self.ann.get_layers():
+            if layer.get_type() == TYPE.OUTPUT:
+                return layer.get_output()
+                
     # User defined function for initializing and running
     # the Marvin class
     def run(self):
@@ -68,7 +73,9 @@ class Marvin (EpuckBasic):
                 #val = s.getValue()
             sens = self.get_proximities()
             self.enter_input(sens)
-
+            self.ann.execute()
+            print self.get_output()
+            
             # Process sensor data here.
             #self.enter_input(img)
             # Enter here functions to send actuator commands, like:
