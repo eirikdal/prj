@@ -17,6 +17,10 @@ class GenericANN:
         return self.__exec_order
     
     def __init__(self):
+        self.__layers = []
+        self.__links = []
+        self.__exec_order = []
+        
         io = ann_io.ann_io()
         __ann_data = io.read()
         

@@ -15,11 +15,12 @@ def ol(x):
         return False
 
 class AgentANN(GenericANN):
-    def __init__(self, sensors, motors):
+    def __init__(self):
         
-        input_layers = filter(il,self.__layers)
-        output_layers = filter(ol,self.__layers)
+        #input_layers = filter(il,self.__layers)
+        #output_layers = filter(ol,self.__layers)
         
-        self.__sensors = zip(sensors, input_layers)
-        self.__motors = zip(motors, output_layers)
+        #self.__sensors = zip(sensors, input_layers)
+        #self.__motors = zip(motors, output_layers)
         
+        GenericANN.__init__(self)

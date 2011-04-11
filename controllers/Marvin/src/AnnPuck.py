@@ -20,3 +20,5 @@ class AnnPuck(AgentANN):
         self.agent_cycles = agent_cycles
         self.act_noise = act_noise
         
+        AgentANN.__init__(self)
+        

@@ -2,11 +2,7 @@ from ann_data import ANN, TOPOLOGY, RULE, ANN_LAYER, ANN_LINK
 from Layer import TYPE
 import Layer
 
-class ann_io:
-    __data = ANN()
-    __layer = ANN_LAYER()
-    __link = ANN_LINK()
-    
+class ann_io:    
     def read(self):
         file = open("ann.txt")
     
@@ -38,7 +34,7 @@ class ann_io:
             else:
                 self.__parse_exec_order(str[0])
                 
-        return self.__ann_data.setup()
+        return self.__data
     
     def __init__(self):
         self.__data = ANN()
