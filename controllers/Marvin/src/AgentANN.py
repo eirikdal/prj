@@ -1,4 +1,4 @@
-import GenericANN
+from GenericANN import GenericANN
 
 from Layer import TYPE
 
@@ -16,7 +16,6 @@ def ol(x):
 
 class AgentANN(GenericANN):
     def __init__(self, sensors, motors):
-        super()
         
         input_layers = filter(il,self.__layers)
         output_layers = filter(ol,self.__layers)
