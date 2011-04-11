@@ -48,3 +48,12 @@ class Link:
     
     def getMinWeight(self):
         return self.__minWeight
+    
+    def getOutWeights(self, node):
+        sum = 0
+        
+        for arc in self.__arcs:
+            if (arc.getPostNode() == node):
+                sum += arc.getPreNode().getActivationLevel() * arc.getCurrentWeight()
+                
+        return sum
