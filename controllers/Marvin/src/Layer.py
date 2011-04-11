@@ -63,7 +63,7 @@ class Layer(object):
                 #print "Layer: num links: ", len(self.__links_in)
                 for link in self.__links_in:
                     __sum += link.getOutWeights(node)
-                #print "Layer: ", __sum
+                print "Layer: ", self.__activation_function(__sum)
                 node.setMembranePotential(__sum)
                 node.setActivationLevel(self.__activation_function(__sum))
         
