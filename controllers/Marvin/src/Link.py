@@ -3,32 +3,24 @@ from ann_data import TOPOLOGY
 from Arc import Arc
 
 class Link:
-    __arcs = [] # 2-dimensional array for arcs, TODO why 2D ?
-    __preLayer = [] # pre-synaptic Layer
-    __postLayer = [] # post-synaptic Layer
-    __connectionType = TOPOLOGY.FULL
-    __minWeight = 0
-    __maxWeight = 0
-    __learningRule = [] # subclass of LearningFunction
-    __learning_mode = False
-    __connectionProb = 0
-    
-    def __init__(self, ann_link):
+    def __init__(self, ann_link, layers):
+        self.__arcs = [] # 2-dimensional array for arcs, TODO why 2D ?
+        self.__learningRule = [] # subclass of LearningFunction
+        self.__learning_mode = False
         self.__connectionType = ann_link.get_link_conn_top()
         range = ann_link.get_link_range()
-        self.__minWeight = range[0]
-        self.__maxWeight = range[1]
+        self.__minWeight = int(range[0])
+        self.__maxWeight = int(range[1])
         self.__connectionProb = ann_link.get_link_conn_prob()
-    '''
-    def __init__(self, arcs, preLayer, postLayer, connection, minWeight, maxWeight, learningRule):
-        self.__arcs = arcs
-        self.__connectionType = connection
-        self.__learningRule = learningRule
-        self.__maxWeight = maxWeight
-        self.__minWeight = minWeight
-        self.__preLayer = preLayer
-        self.__postLayer = postLayer
-    '''
+        
+        preLayer = ann_link.get_link_name_pre()
+        postLayer = ann_link.get_link_name_post()
+            
+        for layer in layers:            
+            if layer.get_name() == preLayer:
+                self.__preLayer = layer
+            elif layer.get_name() == postLayer:
+                self.__postLayer = layer
         
     def connect(self):
         if (self.__connectionType == TOPOLOGY.FULL):
@@ -60,7 +52,7 @@ class Link:
                         arc = Arc(pre, post, weight, self)
                         self.__arcs.append(arc)
         elif (self.__connectionType == TOPOLOGY.TRIANGULAR):
-             for i in range(self.__preLayer.get_nodes()):
+            for i in range(self.__preLayer.get_nodes()):
                 for j in range(self.__postLayer.get_nodes()):
                     if (not (i == j)):
                         weight = random.uniform(self.__minWeight, self.__maxWeight)

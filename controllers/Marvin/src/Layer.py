@@ -2,6 +2,7 @@ import math
 
 from ann_data import ANN_LAYER
 from Node import Node
+from LearningRule import LearningFunction
 
 def sigmoid(self, x):
     return math.tanh(x)
@@ -15,25 +16,27 @@ class TYPE:
     OUTPUT = 2
 
 class Layer(object):
-    __nodes = []
-    __activation_function = sigmoid
-    __name = ""
-    __type = TYPE.INPUT
-    __size = 0
-    __links_in = []
-    __links_out = []
-    __learning_mode = False
-    __quiescent_mode = False
-    __active_mode = False #Indicating whether or not the layer is currently able to a) update its neuron activation levels, and b) send those signals downstream neurons
-    __max_settling_rounds = 1
-    
     def __init__(self,ann_layer):
+        self.__nodes = []
+        self.__links_in = []
+        self.__links_out = []
+        self.__learning_mode = False
+        self.__quiescent_mode = False
+        self.__active_mode = False #Indicating whether or not the layer is currently able to a) update its neuron activation levels, and b) send those signals downstream neurons
+        self.__max_settling_rounds = 1
         self.__activation_function = ann_layer.get_layer_act_func()
         self.__name = ann_layer.get_layer_name()
         self.__size = ann_layer.get_layer_size()
         for i in range(self.__size):
             self.__nodes.append(Node(self))
         self.__type = ann_layer.get_layer_type()
+        
+    def printout(self):
+        print "Layer: " + self.get_name()
+        print "Learning mode: ", self.__learning_mode
+        print "Quiescent mode: ", self.__quiescent_mode
+        print "Active mode: ", self.__active_mode
+        print "Number of nodes: ", self.__size
         
     def init_input(self,input):
         for i in range(len(input)):
@@ -49,7 +52,7 @@ class Layer(object):
         
     def execute(self):
         __sum = 0
-        
+        print "executing layer: " + self.get_name()
         if(not self.__quiescent_mode and self.__active_mode and self.__learning_mode):
             for node in self.nodes:
                 for link in self.__links_in:
