@@ -35,13 +35,24 @@ class Layer(object):
             self.__nodes.append(Node(self))
         self.__type = ann_layer.get_layer_type()
         
+    def init_input(self,input):
+        for i in range(len(input)):
+            self.__nodes[i].setMembranePotential(float(input[i]))
+            self.__nodes[i].setActivationLevel(float(input[i]))
+            
+    def reset_nodes(self):
+        for i in range(self.__nodes.__len__()):
+            self.__nodes[i].reset()
+        
     def execute(self):
         __sum = 0
-        for i in range(self.nodes):
-            for j in range(self.__links_in):
-                __sum += self.nodes[i] * self.__links_in[i];
-            for j in range(self.__links_out):
-                self.__links_out[j] = self.__activation_function(__sum)
+        if self.__active_mode:
+            for i in range(self.__max_settling_rounds):
+                for i in range(self.nodes):
+                    for j in range(self.__links_in):
+                        __sum += self.nodes[i] * self.__links_in[i];
+                    for j in range(self.__links_out):
+                        self.__links_out[j] = self.__activation_function(__sum)
     
     def get_type(self):
         return self.__type
