@@ -6,7 +6,7 @@ class Link:
     def __init__(self, ann_link, layers):
         self.__arcs = [] # 2-dimensional array for arcs, TODO why 2D ?
         self.__learningRule = [] # subclass of LearningFunction
-        self.__learning_mode = False
+        self.__learning_mode = True
         self.__connectionType = ann_link.get_link_conn_top()
         range = ann_link.get_link_range()
         self.__minWeight = int(range[0])

@@ -41,9 +41,17 @@ class GenericANN:
             print "------------------------"
         
         for ann_link in __ann_data.get_links():
+            # Adding layers to links
             link = Link(ann_link, self.get_layers())
             self.__links.append(link)
-
+            
+            # Adding links to layers
+            for layer in self.get_layers():
+                if link.getPostLayer().get_name() == layer.get_name():
+                    layer.add_link_out(link)
+                elif link.getPreLayer().get_name() == layer.get_name():
+                    layer.add_link_in(link)
+            
             print "GenericANN: Adding link from: " + link.getPreLayer().get_name() + " to: " + \
                       link.getPostLayer().get_name()
                       

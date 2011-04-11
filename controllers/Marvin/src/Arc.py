@@ -18,7 +18,7 @@ class Arc:
     def getPreNode(self):
         return self.__preNode
     
-    def getProstNode(self):
+    def getPostNode(self):
         return self.__postNode
     
     def getCurrentWeight(self):

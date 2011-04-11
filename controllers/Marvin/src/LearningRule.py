@@ -18,7 +18,7 @@ class ClassicalHebbLearning(LearningFunction):
         LearningFunction.__init__(self, learningRate)
     
     def getWeightChange(self,preNode,postNode,weight):
-        return preNode.getActivationLevel() * postNode.getActivationLevel() * self.__learningRate
+        return preNode.getActivationLevel() * postNode.getActivationLevel() * self.getLearningRate()
     
 class GeneralHebbLearning(LearningFunction):
     def __init__(self, learningRate, theta):
@@ -26,7 +26,7 @@ class GeneralHebbLearning(LearningFunction):
         self.__theta = theta
     
     def getWeightChange(self,preNode,postNode,weight):
-        return self.__learningRate * \
+        return self.getLearningRate() * \
             (preNode.getActivationLevel() - self.__theta) * \
             (postNode.getActivationLevel() - self.__theta)
             
@@ -35,7 +35,7 @@ class OjaLearning(LearningFunction):
         LearningFunction.__init__(self, learningRate)
 
     def getWeightChange(self,preNode,postNode,weight):
-        return self.__learningRate * \
+        return self.getLearningRate() * \
             (preNode.getActivationLevel() * \
              postNode.getActivationLevel() - \
              postNode.getActivationLevel()**2 * weight)
