@@ -32,7 +32,7 @@ class Link:
                     self.__arcs.append(arc)
             self.__postLayer.printNodes()
         elif (self.__connectionType == TOPOLOGY.ONEONE):
-            for i in range(self.__preLayer.get_nodes()):
+            for i in range(len(self.__preLayer.get_nodes())):
                 weight = random.uniform(self.__minWeight, self.__maxWeight)
                 if (i < len(self.__postLayer.get_nodes())):
                     post = self.__postLayer.get_nodes()[i]
