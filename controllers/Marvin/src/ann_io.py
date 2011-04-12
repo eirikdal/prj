@@ -14,8 +14,9 @@ def read_training_data():
         str = strdat.split()
         if not str: continue
         
-        training_data.append(([str[i] for i in range(len(str)-2)],[str[i] for i in range(len(str)-2,len(str))]))
-        
+        training_data.append(([str[i] for i in range(len(str)-2)],\
+                              [str[i] for i in range(len(str)-2,len(str))]))
+    
     return training_data
 
 class ann_io:    
