@@ -16,7 +16,7 @@ class Link:
         preLayer = ann_link.get_link_name_pre()
         postLayer = ann_link.get_link_name_post()
         
-        for layer in layers:            
+        for layer in layers:
             if layer.get_name() == preLayer:
                 self.__preLayer = layer
             elif layer.get_name() == postLayer:

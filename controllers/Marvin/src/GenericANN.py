@@ -97,7 +97,7 @@ class GenericANN:
                 error_big = False
                 for node in lastLayer.get_nodes():
                     print "error: ",node.get_delta(), "output: ",node.getActivationLevel()
-                    if(abs(node.get_delta()) < 0.4):
+                    if(abs(node.get_delta()) > 1.0):
                         error_big = True
                         
                 lastLayer.reset_for_training()

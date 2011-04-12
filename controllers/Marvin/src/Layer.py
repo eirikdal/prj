@@ -21,7 +21,7 @@ def linear(x):
     return x
 
 def dlinear(y):
-    return 0
+    return 1
 
 def plinear(x):
     if x > 0.0: return x
@@ -86,7 +86,7 @@ class Layer(object):
     def execute(self):
         __sum = 0
         print "Layer: Executing layer: " + self.get_name()
-        if(not self.__quiescent_mode and self.__active_mode and self.__learning_mode):
+        if(not self.__quiescent_mode and self.__active_mode):
             for node in self.__nodes:
                 #print "Layer: num links: ", len(self.__links_in)
                 for link in self.__links_in:
@@ -94,7 +94,7 @@ class Layer(object):
                 node.setMembranePotential(__sum)
                 print "sum ",__sum
                 node.setActivationLevel(self.__activation_function(__sum))
-                print "set activation lvl for a node in ",self.__name,": ",node.getActivationLevel()
+                #print "set activation lvl for a node in ",self.__name,": ",node.getActivationLevel()
     
     def backPropagate(self):         
         if (not self.__calculated_delta):
@@ -113,7 +113,7 @@ class Layer(object):
                     print "Layer: Calculate delta: ", i, self.__nodes[i].get_delta()
                     self.__nodes[i].set_delta(self.getDerivationFunction(self.__activation_function)( \
                         self.__nodes[i].get_delta_backup()))
-                    print "set delta for non-output node: ", self.__nodes[i].get_delta(), " - backup is: ",self.__nodes[i].get_delta_backup()
+                    #print "set delta for non-output node: ", self.__nodes[i].get_delta(), " - backup is: ",self.__nodes[i].get_delta_backup()
             
                     self.__calculated_delta = True
         
