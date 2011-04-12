@@ -14,7 +14,6 @@ class RULE:
     OJA=0
     GENERAL=1
     CLASSICAL=2
-    NONE=3
 
 class ANN_LAYER:
     def __init__(self):

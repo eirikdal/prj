@@ -3,8 +3,6 @@ class Node:
     __membranePotential = 0 # simplest version: sum of the weighted inputs
     __activationLevel = 0
     __prevActivationLevel = 0
-    __delta_backup = 0
-    __delta = 0
     
     def __init__(self,layer):
         self.__layer = layer
@@ -29,12 +27,6 @@ class Node:
         
     def setMembranePotential(self, membranePot):
         self.__membranePotential = membranePot
-        
-    def reset(self):
-        self.reset_delta(self)
-        self.__membranePotential = 0
-        self.__activationLevel = 0
-        self.__prevActivationLevel = 0
         
     def get_delta(self):
         return self.__delta
