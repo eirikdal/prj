@@ -68,7 +68,7 @@ class Link:
             for arc in self.__arcs:
                 if (arc.getPreNode().getLayer().is_active() and arc.getPreNode().getLayer().is_learning()):
                     arc.setCurrentWeight(arc.getCurrentWeight() + \
-                        self.__learningRule.getWeightChange(arc.getPreNode().getActivationLevel(), arc.getPostNode().ActivationLevel(), arc.getCurrentWeight()))
+                        self.__learningRule.getWeightChange(arc.getPreNode().getActivationLevel(), arc.getPostNode().getActivationLevel(), arc.getCurrentWeight()))
                 
     def backLearn(self):
         for arc in self.getArcs():
