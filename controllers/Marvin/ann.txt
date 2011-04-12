@@ -1,0 +1,47 @@
+begin layer
+layer_name sensors
+layer_type input
+layer_size 8
+layer_act_func sigmoid
+end layer
+
+begin layer
+layer_name hidden
+layer_type hidden
+layer_size 8
+layer_act_func sigmoid
+end layer
+
+begin layer
+layer_name motors
+layer_type output
+layer_size 8
+layer_act_func sigmoid
+end layer
+
+begin link
+link_name_pre sensors
+link_name_post hidden
+link_conn_top full
+link_conn_prob 0.5
+link_learn_rule general-hebb
+link_learn_param 0.3
+link_learn_rate 0.5
+link_range 0,10
+end link
+
+begin link
+link_name_pre hidden
+link_name_post motors
+link_conn_top full
+link_conn_prob 0.5
+link_learn_rule general-hebb
+link_learn_param 0.3
+link_learn_rate 0.5
+link_range 0,10
+end link
+
+begin exec_order
+hidden 0
+motors 1
+end exec_order
