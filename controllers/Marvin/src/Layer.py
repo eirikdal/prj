@@ -20,6 +20,9 @@ def step(x, v):
 def linear(x):
     return x
 
+def dlinear(y):
+    return 0
+
 def plinear(x):
     if x > 0.0: return x
     else: return 0
@@ -104,7 +107,7 @@ class Layer(object):
                 if(len(self.__links_out) == 0):
                     print "test", self.__targetData
                     self.__nodes[i].set_delta(self.getDerivationFunction(self.__activation_function)( \
-                        int(self.__targetData[i]) - self.__nodes[i].getActivationLevel())) 
+                        float(self.__targetData[i]) - self.__nodes[i].getActivationLevel())) 
                     print "set delta for output node ", self.__nodes[i].get_delta()            
                 else:
                     print "Layer: Calculate delta: ", i, self.__nodes[i].get_delta()
@@ -168,6 +171,8 @@ class Layer(object):
             return ddsigmoid
         if(function == logistical):
             return dlogistical
+        if(function == linear):
+            return dlinear
         
     def reset_for_training(self):
         self.__calculated_delta = False
