@@ -22,10 +22,13 @@ def linear(x):
 
 def plinear(x):
     if x > 0.0: return x
-    else: return x
+    else: return 0
 
 def logistical(x):
     return 1 / (1 + math.e ** (-x))
+
+def dlogistical(y):
+    return math.e ** (-y) / (math.e ** (-y) + 1) ** 2
 
 class TYPE:
     INPUT = 0
@@ -163,6 +166,8 @@ class Layer(object):
             return dsigmoid;
         if(function == dsigmoid):
             return ddsigmoid
+        if(function == logistical):
+            return dlogistical
         
     def reset_for_training(self):
         self.__calculated_delta = False
