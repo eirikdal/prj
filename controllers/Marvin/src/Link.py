@@ -103,6 +103,11 @@ class Link:
     def setLearningRule(self, rule):
         self.__learningRule = rule
     
+    def setLearningMode(self, learningMode):
+        self.__learning_mode = learningMode
+    def getLearningMode(self):
+        return self.__learning_mode    
+    
     def getMaxWeight(self):
         return self.__maxWeight
     

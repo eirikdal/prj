@@ -70,6 +70,7 @@ class Marvin (EpuckBasic):
 
         training_data = read_training_data()
         self.ann.do_training(training_data)
+        self.ann.stop_training()
         
         # Main loop
         while True:
