@@ -7,6 +7,9 @@ from LearningRule import LearningFunction
 def sigmoid(x):
     return math.tanh(x)
 
+def sigmoid_derivative(x):
+    return x * (1-x)
+
 def dsigmoid(y):
     return 1.0 - y**2
 
@@ -27,6 +30,7 @@ class Layer(object):
         self.__activation_function = ann_layer.get_layer_act_func()
         self.__name = ann_layer.get_layer_name()
         self.__size = ann_layer.get_layer_size()
+        self.__calculated_delta = False
         for i in range(self.__size):
             self.__nodes.append(Node(self))
         self.__type = ann_layer.get_layer_type()
@@ -69,7 +73,37 @@ class Layer(object):
                     __sum += link.getOutWeights(node)
                 node.setMembranePotential(__sum)
                 node.setActivationLevel(self.__activation_function(__sum))
+    
+    def backPropagate(self):
+        print "back propagate for ",self.__name
+        if (not self.__calculated_delta):
+            print "calculate deltas"
+            for i in range(len(self.__nodes)):
+                if(len(self.__links_out) == 0):
+                    self.__nodes[i].set_delta(self.getDerivationFunction(self.__activation_function)( \
+                        self.__targetData[i] - self.__nodes[i].getActivationLevel()))                 
+                else:
+                    self.__nodes[i].set_delta(self.getDerivationFunction(self.__activation_function)( \
+                        self.__nodes[i].get_delta_backup()))
+                
+        for link in self.__links_out:
+            print "calculate delta backup"
+            delta_backup = []
+            for j in range(len(self.get_nodes())):
+                delta_backup[self.get_nodes()[j]] = 0
+            for arc in link.getArcs():
+                delta_backup[arc.getPreNode()] += arc.getPostNode().get_delta() * arc.getCurrentWeight()
+                arc.setCurrentWeight(arc.getCurrentWeight() + \
+                                     link.getLearningRule().getLearningRate() * \
+                                     arc.getPreNode.getActivationLevel() * \
+                                     arc.getPostNode.get_delta())
+            for node in self.get_nodes():
+                node.add_delta_backup(delta_backup(node))
+            
+        self.__calculated_delta = True
         
+        for link in self.__links_in:
+            link.getPreLayer().backPropagate()
   
     def get_type(self):
         return self.__type
@@ -114,3 +148,15 @@ class Layer(object):
 
     def set_target_data(self, data):
         self.__targetData = data
+        
+    def getDerivationFunction(self, function):
+        if(function == sigmoid):
+            return sigmoid_derivative;
+        
+    def reset_for_training(self):
+        self.__calculated_delta = False
+        for node in self.__nodes:
+            node.reset_delta()
+        
+        for link in self.__links_in:
+            link.getPreLayer().reset_for_training()

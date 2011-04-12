@@ -28,7 +28,7 @@ class Link:
                 for post in self.__postLayer.get_nodes():
                     weight = random.uniform(self.__minWeight, self.__maxWeight)
                     arc = Arc(pre, post, weight, self)
-                    print "connecting ",pre," of ",pre.getLayer(), "(",pre.getLayer().get_name(),") to ", post, " of ",post.getLayer(), "(",post.getLayer().get_name(),")"
+                    #print "connecting ",pre," of ",pre.getLayer(), "(",pre.getLayer().get_name(),") to ", post, " of ",post.getLayer(), "(",post.getLayer().get_name(),")"
                     self.__arcs.append(arc)
             self.__postLayer.printNodes()
         elif (self.__connectionType == TOPOLOGY.ONEONE):
@@ -69,11 +69,7 @@ class Link:
                 if (arc.getPreNode().getLayer().is_active() and arc.getPreNode().getLayer().is_learning()):
                     arc.setCurrentWeight(arc.getCurrentWeight() + \
                         self.__learningRule.getWeightChange(arc.getPreNode(), arc.getPostNode(), arc.getCurrentWeight()))
-        
-    def doBackPropagation(self):
-        #back propagation
-        
-        
+                
     def getArcs(self):
         return self.__arcs
     

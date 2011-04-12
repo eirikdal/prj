@@ -17,12 +17,18 @@ class Arc:
         
     def getPreNode(self):
         return self.__preNode
+    def setPreNode(self, preNode):
+        self.__preNode = preNode
     
     def getPostNode(self):
         return self.__postNode
+    def setPostNode(self, postNode):
+        self.__postNode = postNode
     
     def getCurrentWeight(self):
         return self.__currentWeight
+    def setCurrentWeight(self,weight):
+        self.__currentWeight = weight
     
     def getInitialWeight(self):
         return self.__initialWeight
@@ -30,15 +36,6 @@ class Arc:
     def getLink(self):
         return self.__link
     
-    def setPreNode(self, preNode):
-        self.__preNode = preNode
-        
-    def setPostNode(self, postNode):
-        self.__postNode = postNode
-                
-    def setCurrentWeight(self,weight):
-        self.__currentWeight = weight
-        
     def setInitialWeight(self,weight):
         self.__currentWeight = weight
         self.__initialWeight = weight

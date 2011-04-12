@@ -14,6 +14,7 @@ from epuck_basic import EpuckBasic
 from imagepro import column_avg
 from Layer import TYPE
 from AnnPuck import AnnPuck
+from ann_io import read_training_data
 import prims1
 
 # Here is the main class of your controller.
@@ -37,8 +38,10 @@ class Marvin (EpuckBasic):
         self.ann.redman_run()
         
     def enter_input(self,sensors):
+        #print sensors
         for layer in self.ann.get_layers():
             if layer.get_type() == TYPE.INPUT:
+                sensors = map(lambda(x): x/4e3, sensors)
                 layer.init_input(sensors)
                 
     def get_output(self):
@@ -58,14 +61,16 @@ class Marvin (EpuckBasic):
         3. move, move_wheels, set_wheel_speeds
         4. run_timestep, do_timed_action
         '''
+        #self.move_wheels(left, right, duration)
         
         #print self.get_proximities()
         #pimg = self.snapshot(True)
         #print "proximities: "
         #print self.get_proximities()
-        
-        self.ann.do_training()
 
+        training_data = read_training_data()
+        self.ann.do_training(training_data)
+        
         # Main loop
         while True:
       
@@ -76,7 +81,16 @@ class Marvin (EpuckBasic):
             sens = self.get_proximities()
             self.enter_input(sens)
             self.ann.execute()
-            print self.get_output()
+            output = self.get_output()
+            
+            left = 0
+            right = 0
+            
+            for i in range(len(output)/2):
+                left += output[i]
+                right += output[len(output)-1-i]
+            
+            self.set_wheel_speeds(left, right)
             
             # Process sensor data here.
             #self.enter_input(img)
