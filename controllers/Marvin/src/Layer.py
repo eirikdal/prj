@@ -20,6 +20,9 @@ def step(x, v):
 def linear(x):
     return x
 
+def dlinear(y):
+    return 0
+
 def plinear(x):
     if x > 0.0: return x
     else: return 0
@@ -169,6 +172,8 @@ class Layer(object):
             return ddsigmoid
         if(function == logistical):
             return dlogistical
+        if(function == linear):
+            return dlinear
         
     def reset_for_training(self):
         self.__calculated_delta = False

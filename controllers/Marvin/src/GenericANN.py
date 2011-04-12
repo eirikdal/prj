@@ -91,15 +91,15 @@ class GenericANN:
                     for layer in self.__layers:
                         if layer.get_name() == name:
                             layer.execute()
-                for node in lastLayer.get_nodes():
-                    print "output: ", node.getActivationLevel()
                 #do backpropagation
                 lastLayer.backPropagate()
-                for node in firstLayer.get_nodes():
+                for node in lastLayer.get_nodes():
                     print "error: ",node.get_delta()
                     if(abs(node.get_delta()) < 10):
                         error_big = False
             
+                for node in lastLayer.get_nodes():
+                    print "output: ", node.getActivationLevel()
                 lastLayer.reset_for_training()
         
     def getFirstLayer(self):
