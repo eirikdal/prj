@@ -97,6 +97,10 @@ class GenericANN:
                 error_big = False
                 for node in lastLayer.get_nodes():
                     print "error: ",node.get_delta(), "output: ",node.getActivationLevel()
+<<<<<<< HEAD
+=======
+                    print abs(node.get_delta())
+>>>>>>> c4aa4b658efc64f3572ca065b02bc4d0a715590d
                     if(abs(node.get_delta()) > 1.0):
                         error_big = True
                         

@@ -104,19 +104,23 @@ class ann_io:
         elif s[0] == "link_conn_top":
             if s[1] == "full":
                 self.__link.set_link_conn_top(TOPOLOGY.FULL)
-            elif (s[0] == "oneone"):
+            elif (s[1] == "oneone"):
                 self.__link.set_link_conn_top(TOPOLOGY.ONEONE)
-            elif s[0] == "triangular":
+            elif s[1] == "triangular":
                 self.__link.set_link_conn_top(TOPOLOGY.TRIANGULAR)
-            elif s[0] == "stochastic":
+            elif s[1] == "stochastic":
                 self.__link.set_link_conn_top(TOPOLOGY.STOCHASTIC)
         elif s[0] == "link_conn_prob":
             self.__link.set_link_conn_prob(float(s[1]))
         elif s[0] == "link_learn_rule":
             if s[1] == "general-hebb":
                 self.__link.set_link_learn_rule(RULE.GENERAL)
+            elif s[1] == "classical-hebb":
+                self.__link.set_link_learn_rule(RULE.CLASSICAL)
             elif s[1] == "oja":
                 self.__link.set_link_learn_rule(RULE.OJA)
+            elif s[1] == "none":
+                self.__link.set_link_learn_rule(RULE.NONE)
         elif s[0] == "link_learn_param":
             self.__link.set_link_learn_param(float(s[1]))
         elif s[0] == "link_learn_rate":

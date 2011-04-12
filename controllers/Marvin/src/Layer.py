@@ -8,30 +8,36 @@ def sigmoid(x):
     return math.tanh(x)
 
 def dsigmoid(y):
-    return 1.0 - y**2
+    return 1.0 - y**2.0
 
-def ddsigmoid(y):
-    return -2*y
+#def ddsigmoid(y):
+#    return -2.0*y
 
 def step(x):
     if x > 0.1: return 1.0 
     else: return 0.0
+
+def dstep(x):
+    return 1.0
     
 def linear(x):
     return x
 
 def dlinear(y):
-    return 1
+    return 1.0
 
 def plinear(x):
     if x > 0.0: return x
     else: return 0
+    
+def dplinear(x):
+    return 1.0
 
 def logistical(x):
-    return 1 / (1 + math.e ** (-x))
+    return 1.0 / (1.0 + math.e ** (-x))
 
 def dlogistical(y):
-    return math.e ** (-y) / (math.e ** (-y) + 1) ** 2
+    return math.e ** (-y) / (math.e ** (-y) + 1.0) ** 2.0
 
 class TYPE:
     INPUT = 0
@@ -167,12 +173,14 @@ class Layer(object):
     def getDerivationFunction(self, function):
         if(function == sigmoid):
             return dsigmoid;
-        if(function == dsigmoid):
-            return ddsigmoid
         if(function == logistical):
             return dlogistical
         if(function == linear):
             return dlinear
+        if (function == step):
+            return dstep
+        if (function == plinear):
+            return dplinear
         
     def reset_for_training(self):
         self.__calculated_delta = False
