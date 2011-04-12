@@ -2,20 +2,20 @@ begin layer
 layer_name sensors
 layer_type input
 layer_size 8
-layer_act_func sigmoid
+layer_act_func logistical
 end layer
 
 begin layer
 layer_name hidden
 layer_type hidden
-layer_size 8
-layer_act_func sigmoid
+layer_size 4
+layer_act_func logistical
 end layer
 
 begin layer
 layer_name motors
 layer_type output
-layer_size 8
+layer_size 2
 layer_act_func sigmoid
 end layer
 
