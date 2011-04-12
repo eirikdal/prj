@@ -28,12 +28,6 @@ class Node:
     def setMembranePotential(self, membranePot):
         self.__membranePotential = membranePot
         
-    def reset(self):
-        self.reset_delta(self)
-        self.__membranePotential = 0
-        self.__activationLevel = 0
-        self.__prevActivationLevel = 0
-        
     def get_delta(self):
         return self.__delta
     def set_delta(self, delta):

@@ -13,17 +13,6 @@ def sigmoid_derivative(x):
 def dsigmoid(y):
     return 1.0 - y**2
 
-def step(x, v):
-    if x > v: return 1.0 
-    else: return 0.0
-    
-def linear(x):
-    return x
-
-def plinear(x):
-    if x > 0.0: return x
-    else: return x
-
 class TYPE:
     INPUT = 0
     HIDDEN = 1

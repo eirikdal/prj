@@ -89,12 +89,6 @@ class ann_io:
                 self.__layer.set_layer_act_func(Layer.sigmoid)
             elif s[1] == "dsigmoid":
                 self.__layer.set_layer_act_func(Layer.dsigmoid)
-            elif s[1] == "linear":
-                self.__layer.set_layer_act_func(Layer.linear)
-            elif s[1] == "plinear":
-                self.__layer.set_layer_act_func(Layer.plinear)
-            elif s[1] == "step":
-                self.__layer.set_layer_act_func(Layer.step)
         elif s[0] == "link_name_pre":
             self.__link.set_link_name_pre(s[1])
         elif s[0] == "link_name_post":
