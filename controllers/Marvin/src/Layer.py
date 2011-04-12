@@ -13,8 +13,8 @@ def dsigmoid(y):
 def ddsigmoid(y):
     return -2*y
 
-def step(x, v):
-    if x > v: return 1.0 
+def step(x):
+    if x > 0.1: return 1.0 
     else: return 0.0
     
 def linear(x):
@@ -96,30 +96,29 @@ class Layer(object):
                 node.setActivationLevel(self.__activation_function(__sum))
                 print "set activation lvl for a node in ",self.__name,": ",node.getActivationLevel()
     
-    def backPropagate(self):
-        for i in range(self.__max_settling_rounds):                
-            if (not self.__calculated_delta):
-                print "back propagate for ",self.__name
-                for link in self.__links_out:
-                    link.backLearn()
-                
-                print "calculate deltas"
-                for i in range(len(self.__nodes)):
-                    if(len(self.__links_out) == 0):
-                        print "test", self.__targetData
-                        self.__nodes[i].set_delta(self.getDerivationFunction(self.__activation_function)( \
-                            float(self.__targetData[i]) - self.__nodes[i].getActivationLevel())) 
-                        print "set delta for output node ", self.__nodes[i].get_delta()            
-                    else:
-                        print "Layer: Calculate delta: ", i, self.__nodes[i].get_delta()
-                        self.__nodes[i].set_delta(self.getDerivationFunction(self.__activation_function)( \
-                            self.__nodes[i].get_delta_backup()))
-                        print "set delta for non-output node: ", self.__nodes[i].get_delta(), " - backup is: ",self.__nodes[i].get_delta_backup()
-                
-                        self.__calculated_delta = True
+    def backPropagate(self):         
+        if (not self.__calculated_delta):
+            print "back propagate for ",self.__name
+            for link in self.__links_out:
+                link.backLearn()
             
-                for link in self.__links_in:
-                    link.getPreLayer().backPropagate()
+            print "calculate deltas"
+            for i in range(len(self.__nodes)):
+                if(len(self.__links_out) == 0):
+                    print "test", self.__targetData
+                    self.__nodes[i].set_delta(self.getDerivationFunction(self.__activation_function)( \
+                        float(self.__targetData[i]) - self.__nodes[i].getActivationLevel())) 
+                    print "set delta for output node ", self.__nodes[i].get_delta()            
+                else:
+                    print "Layer: Calculate delta: ", i, self.__nodes[i].get_delta()
+                    self.__nodes[i].set_delta(self.getDerivationFunction(self.__activation_function)( \
+                        self.__nodes[i].get_delta_backup()))
+                    print "set delta for non-output node: ", self.__nodes[i].get_delta(), " - backup is: ",self.__nodes[i].get_delta_backup()
+            
+                    self.__calculated_delta = True
+        
+            for link in self.__links_in:
+                link.getPreLayer().backPropagate()
   
     def get_type(self):
         return self.__type
