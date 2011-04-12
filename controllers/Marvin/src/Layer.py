@@ -13,8 +13,8 @@ def dsigmoid(y):
 def ddsigmoid(y):
     return -2*y
 
-def step(x, v):
-    if x > v: return 1.0 
+def step(x):
+    if x > 0.1: return 1.0 
     else: return 0.0
     
 def linear(x):
@@ -46,7 +46,7 @@ class Layer(object):
         self.__learning_mode = True
         self.__quiescent_mode = False
         self.__active_mode = True #Indicating whether or not the layer is currently able to a) update its neuron activation levels, and b) send those signals downstream neurons
-        self.__max_settling_rounds = 1
+        self.__max_settling_rounds = 10
         self.__activation_function = ann_layer.get_layer_act_func()
         self.__name = ann_layer.get_layer_name()
         self.__size = ann_layer.get_layer_size()
@@ -96,7 +96,7 @@ class Layer(object):
                 node.setActivationLevel(self.__activation_function(__sum))
                 print "set activation lvl for a node in ",self.__name,": ",node.getActivationLevel()
     
-    def backPropagate(self):                
+    def backPropagate(self):         
         if (not self.__calculated_delta):
             print "back propagate for ",self.__name
             for link in self.__links_out:

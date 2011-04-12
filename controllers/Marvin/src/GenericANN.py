@@ -16,6 +16,10 @@ class GenericANN:
     def get_exec_order(self):
         return self.__exec_order
     
+    def stop_training(self):
+        for link in self.__links:
+            link.setLearningMode(False)
+    
     def __init__(self):
         print "GenericANN: Constructor called"
         self.__layers = []
