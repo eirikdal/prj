@@ -95,6 +95,8 @@ class ann_io:
                 self.__layer.set_layer_act_func(Layer.plinear)
             elif s[1] == "step":
                 self.__layer.set_layer_act_func(Layer.step)
+            elif s[1] == "logistical":
+                self.__layer.set_layer_act_func(Layer.logistical)
         elif s[0] == "link_name_pre":
             self.__link.set_link_name_pre(s[1])
         elif s[0] == "link_name_post":

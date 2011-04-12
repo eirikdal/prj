@@ -24,6 +24,9 @@ def plinear(x):
     if x > 0.0: return x
     else: return x
 
+def logistical(x):
+    return 1 / (1 + math.e ** (-x))    
+
 class TYPE:
     INPUT = 0
     HIDDEN = 1
