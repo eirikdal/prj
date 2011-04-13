@@ -136,5 +136,5 @@ class GenericANN:
                     layer.print_nodes()
                     break
                 
-        for link in self.__links:
-            link.update()
+        #for link in self.__links:
+            #link.update()

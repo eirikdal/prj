@@ -15,6 +15,7 @@ from imagepro import column_avg
 from Layer import TYPE
 from AnnPuck import AnnPuck
 from ann_io import read_training_data
+from random import uniform
 import prims1
 
 # Here is the main class of your controller.
@@ -92,15 +93,17 @@ class Marvin (EpuckBasic):
             self.enter_input(sens)
             self.ann.execute()
             output = self.get_output()
-            
+            '''
             left = 0
             right = 0
             
             for i in range(len(output)/2):
                 left += output[i]
                 right += output[len(output)-1-i]
+            '''
+            print "OUTPUT", output[0], output[1], output[2]
             
-            self.set_wheel_speeds(left, right)
+            self.set_wheel_speeds(output[0]-output[2]+uniform(0.4,0.5), output[1]-output[2]+uniform(0.4,0.5))
             
             # Process sensor data here.
             #self.enter_input(img)

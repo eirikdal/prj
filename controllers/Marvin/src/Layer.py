@@ -14,7 +14,7 @@ def dsigmoid(y):
 #    return -2.0*y
 
 def step(x):
-    if x > 0.1: return 1.0 
+    if x > 1.0: return 1.0 
     else: return 0.0
 
 def dstep(x):
@@ -105,6 +105,7 @@ class Layer(object):
                 node.setMembranePotential(__sum)
                 #print "sum ",__sum
                 node.setActivationLevel(self.__activation_function(__sum))
+                __sum = 0 # I found the bug :))
                 #print "set activation lvl for a node in ",self.__name,": ",node.getActivationLevel()
     
     def backPropagate(self):         
