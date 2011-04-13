@@ -10,9 +10,6 @@ def sigmoid(x):
 def dsigmoid(y):
     return y - y**2.0
 
-#def ddsigmoid(y):
-#    return -2.0*y
-
 def step(x):
     if x > 1.0: return 1.0 
     else: return 0.0

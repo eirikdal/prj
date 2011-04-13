@@ -91,14 +91,14 @@ class Link:
     def backLearn(self):
         for arc in self.getArcs():
             arc.getPreNode().add_delta_backup(arc.getPostNode().get_delta() * arc.getCurrentWeight())
-            #print "old arc value ",arc.getCurrentWeight()
+            print "old arc value ",arc.getCurrentWeight()
             arc.setCurrentWeight(arc.getCurrentWeight() + \
                     self.__learningRule.getWeightChange( \
                         arc.getPreNode().getActivationLevel(), \
                         arc.getPostNode().get_delta(), \
                         arc.getCurrentWeight()))
-            #print "learning rate: ",self.getLearningRule().getLearningRate(),", activ. lvl: ",arc.getPreNode().getActivationLevel(), ", delta: ",arc.getPostNode().get_delta()
-            #print "new arc value ",arc.getCurrentWeight()
+            print "learning rate: ",self.getLearningRule().getLearningRate(),", activ. lvl: ",arc.getPreNode().getActivationLevel(), ", delta: ",arc.getPostNode().get_delta()
+            print "new arc value ",arc.getCurrentWeight()
         
     def getArcs(self):
         return self.__arcs
@@ -140,7 +140,7 @@ class Link:
 
         for arc in self.__arcs:
             if arc.getPostNode() == node: 
-                print "getting output from layer ",self.__preLayer.get_name()," to ",self.__postLayer.get_name(), " ",arc.getFrom(),",",arc.getTo()," : ",arc.getPreNode().getActivationLevel(), " * ",arc.getCurrentWeight()
+                #print "getting output from layer ",self.__preLayer.get_name()," to ",self.__postLayer.get_name(), " ",arc.getFrom(),",",arc.getTo()," : ",arc.getPreNode().getActivationLevel(), " * ",arc.getCurrentWeight()
                 sum += arc.getPreNode().getActivationLevel() * arc.getCurrentWeight()
                 
         return sum
