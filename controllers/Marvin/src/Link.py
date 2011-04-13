@@ -21,8 +21,15 @@ class Link:
         else:
             self.__hardwired = False
         
+        for layer in layers:
+            if layer.get_name() == preLayer:
+                self.__preLayer = layer
+            elif layer.get_name() == postLayer:
+                self.__postLayer = layer
+        
         for arc in ann_link.get_arcs():
             from_node = arc.get_from_node()
+            print "from_node for arc: ",arc," - ",from_node
             to_node = arc.get_to_node()
             weight = arc.get_weight()
             
@@ -30,12 +37,6 @@ class Link:
                       self.__postLayer.get_node(to_node),\
                       weight)
             self.__arcs.append(arc)
-        
-        for layer in layers:
-            if layer.get_name() == preLayer:
-                self.__preLayer = layer
-            elif layer.get_name() == postLayer:
-                self.__postLayer = layer
                 
 
     def connect(self):

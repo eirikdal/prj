@@ -2,8 +2,6 @@ from ann_data import ANN, TOPOLOGY, RULE, ANN_LAYER, ANN_LINK, ANN_ARC
 from Layer import TYPE
 import Layer
 
-def 
-
 def read_training_data():
     file = open("training.txt")
     
