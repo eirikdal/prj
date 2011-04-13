@@ -16,12 +16,28 @@ class Link:
         preLayer = ann_link.get_link_name_pre()
         postLayer = ann_link.get_link_name_post()
         
+        if len(self.__arcs) > 0:
+            self.__hardwired = True
+        else:
+            self.__hardwired = False
+        
+        for arc in ann_link.get_arcs():
+            from_node = arc.get_from_node()
+            to_node = arc.get_to_node()
+            weight = arc.get_weight()
+            
+            arc = Arc(self.__preLayer.get_node(from_node),\
+                      self.__postLayer.get_node(to_node),\
+                      weight)
+            self.__arcs.append(arc)
+        
         for layer in layers:
             if layer.get_name() == preLayer:
                 self.__preLayer = layer
             elif layer.get_name() == postLayer:
                 self.__postLayer = layer
-        
+                
+
     def connect(self):
         if (self.__connectionType == TOPOLOGY.FULL):
             for pre in self.__preLayer.get_nodes():
@@ -113,6 +129,9 @@ class Link:
     
     def getMinWeight(self):
         return self.__minWeight
+    
+    def isHardwired(self):
+        return self.__hardwired
     
     def getOutWeights(self, node):
         sum = 0

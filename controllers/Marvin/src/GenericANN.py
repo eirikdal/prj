@@ -67,7 +67,8 @@ class GenericANN:
             elif (ann_link.get_link_learn_rule() == RULE.CLASSICAL):
                 link.setLearningRule(ClassicalHebbLearning(ann_link.get_link_learn_rate()))
                 
-            link.connect()
+            if not link.isHardwired():
+                link.connect()
         
         self.__exec_order = __ann_data.get_exec_order()
         

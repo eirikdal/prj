@@ -152,6 +152,8 @@ class Layer(object):
         self.__nodes.remove(node)
     def get_nodes(self):
         return self.__nodes
+    def get_node(self,i):
+        return self.__nodes[i]
         
     def set_active(self, active):
         self.__active_mode = active
