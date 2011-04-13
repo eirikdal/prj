@@ -16,11 +16,6 @@ class Link:
         preLayer = ann_link.get_link_name_pre()
         postLayer = ann_link.get_link_name_post()
         
-        if len(self.__arcs) > 0:
-            self.__hardwired = True
-        else:
-            self.__hardwired = False
-        
         for layer in layers:
             if layer.get_name() == preLayer:
                 self.__preLayer = layer
@@ -39,8 +34,12 @@ class Link:
             arc.setFrom(from_node)
             arc.setTo(to_node)
             self.__arcs.append(arc)
+        
+        if len(self.__arcs) > 0:
+            self.__hardwired = True
+        else:
+            self.__hardwired = False                
                 
-
     def connect(self):
         if (self.__connectionType == TOPOLOGY.FULL):
             for pre in self.__preLayer.get_nodes():
