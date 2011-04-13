@@ -38,7 +38,7 @@ class Link:
         if len(self.__arcs) > 0:
             self.__hardwired = True
         else:
-            self.__hardwired = False                
+            self.__hardwired = False
                 
     def connect(self):
         if (self.__connectionType == TOPOLOGY.FULL):
@@ -140,6 +140,7 @@ class Link:
 
         for arc in self.__arcs:
             if arc.getPostNode() == node: 
+                print "getting output from layer ",self.__preLayer.get_name()," to ",self.__postLayer.get_name(), " ",arc.getFrom(),",",arc.getTo()," : ",arc.getPreNode().getActivationLevel(), " * ",arc.getCurrentWeight()
                 sum += arc.getPreNode().getActivationLevel() * arc.getCurrentWeight()
                 
         return sum
