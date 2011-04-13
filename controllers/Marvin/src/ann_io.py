@@ -50,7 +50,6 @@ class ann_io:
                 __new_link = True
                 continue
             elif str[0] == "begin" and str[1] == "arc":
-                self.__arc = ANN_ARC()
                 __new_arc = True
                 continue
             elif str[0] == "end" and str[1] == "exec_order":
@@ -142,7 +141,7 @@ class ann_io:
             self.__link.set_link_range((min,max))
         elif s[0] == "arc":
             t = s[1].split(",")
-            from_node,to_node,weight = int(s[0]),int(s[1]),float(s[2])
+            from_node,to_node,weight = int(t[0]),int(t[1]),float(t[2])
             self.__link.add_arc(ANN_ARC(from_node,to_node,weight))
             
         
