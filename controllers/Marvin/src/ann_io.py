@@ -65,7 +65,6 @@ class ann_io:
                 __new_link = False
                 continue
             elif str[0] == "end" and str[1] == "arc":
-                self.__data.get_links()#(self.__link)
                 __new_arc = False
             if not __exec_order:
                 self.__parse(str)
