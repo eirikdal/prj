@@ -29,6 +29,7 @@ class GenericANN:
         print "GenericANN: Begin read from script"
         io = ann_io()
         __ann_data = io.read()
+        self.__hard_wired = __ann_data.get_hard_wired()
         # TODO read training data
         
         print "GenericANN: ", len(__ann_data.get_layers())
@@ -78,40 +79,41 @@ class GenericANN:
         self.__exec_order = __ann_data.get_exec_order()
         
     def do_training(self, training_data):
-        print "Training"
-        
-        for data in training_data:
-            firstLayer = self.getFirstLayer()
-            firstLayer.init_input(data[0])
-            print "first layer: ", firstLayer.get_name()
+        if(not self.__hard_wired):
+            print "Training"
             
-            for dat in data[0]:
-                print "data ",dat
-            lastLayer = self.getLastLayer()
-            print "last layer: ", lastLayer.get_name()
-            lastLayer.set_target_data(data[1])
-            
-            print "GenericANN: Executing training"
-            for i in range(1,300):
-                # execute layers
-                for name in self.__exec_order:
-                    for layer in self.__layers:
-                        if layer.get_name() == name:
-                            layer.execute()
-                #do backpropagation
-                lastLayer.backPropagate()
+            for data in training_data:
+                firstLayer = self.getFirstLayer()
+                firstLayer.init_input(data[0])
+                print "first layer: ", firstLayer.get_name()
                 
-                for node in lastLayer.get_nodes():
-                    print "---------------------------------------------------------------"
-                    print "error: ",node.get_delta(), "output: ",node.getActivationLevel()
-                        
-                lastLayer.reset_for_training()
-        #print resulting weights
-        for link in self.__links:
-            print "from ",link.getPreLayer()," to ",link.getPostLayer()
-            for arc in link.getArcs():
-                print arc.getCurrentWeight()
-        print "----------------------------------------------------"
+                for dat in data[0]:
+                    print "data ",dat
+                lastLayer = self.getLastLayer()
+                print "last layer: ", lastLayer.get_name()
+                lastLayer.set_target_data(data[1])
+                
+                print "GenericANN: Executing training"
+                for i in range(1,300):
+                    # execute layers
+                    for name in self.__exec_order:
+                        for layer in self.__layers:
+                            if layer.get_name() == name:
+                                layer.execute()
+                    #do backpropagation
+                    lastLayer.backPropagate()
+                    
+                    for node in lastLayer.get_nodes():
+                        print "---------------------------------------------------------------"
+                        print "error: ",node.get_delta(), "output: ",node.getActivationLevel()
+                            
+                    lastLayer.reset_for_training()
+            #print resulting weights
+            for link in self.__links:
+                print "from ",link.getPreLayer()," to ",link.getPostLayer()
+                for arc in link.getArcs():
+                    print arc.getCurrentWeight()
+            print "----------------------------------------------------"
         
     def getFirstLayer(self):
         for layer in self.__layers:

@@ -51,11 +51,11 @@ class ANN_ARC:
         self.__weight = weight
     
     def get_from_node(self):
-        self.__from_node
+        return self.__from_node
     def get_to_node(self):
-        self.__to_node
+        return self.__to_node
     def get_weight(self):
-        self.__weight
+        return self.__weight
 
 class ANN_LINK:
     def __init__(self):
@@ -119,9 +119,15 @@ class ANN:
         self.__layers = []
         self.__links = []
         self.__exec_order = []
+        self.__hard_wired = False
         
         self.range = (0,0)
     
+    def set_hard_wired(self,hard):
+        self.__hard_wired = hard
+    def get_hard_wired(self):
+        return self.__hard_wired
+        
     def add_link(self,link):
         self.__links.append(link)
     

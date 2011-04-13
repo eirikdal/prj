@@ -49,6 +49,7 @@ class ann_io:
                 continue
             elif str[0] == "begin" and str[1] == "arc":
                 __new_arc = True
+                self.__data.set_hard_wired(True)
                 continue
             elif str[0] == "end" and str[1] == "exec_order":
                 __exec_order = False
@@ -140,8 +141,5 @@ class ann_io:
         elif s[0] == "arc":
             t = s[1].split(",")
             from_node,to_node,weight = int(t[0]),int(t[1]),float(t[2])
-            print "arc ",from_node,",",to_node,",",weight
             self.__link.add_arc(ANN_ARC(from_node,to_node,weight))
             
-        
-        

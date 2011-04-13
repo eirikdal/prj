@@ -35,7 +35,7 @@ class Link:
             
             arc = Arc(self.__preLayer.get_node(from_node),\
                       self.__postLayer.get_node(to_node),\
-                      weight)
+                      weight,self)
             self.__arcs.append(arc)
                 
 
@@ -139,6 +139,7 @@ class Link:
 
         for arc in self.__arcs:
             if arc.getPostNode() == node: 
+                print "getting output from layer ",self.__preLayer.get_name()," to ",self.__postLayer.get_name(), arc.getPreNode().getActivationLevel(), " * ",arc.getCurrentWeight()
                 sum += arc.getPreNode().getActivationLevel() * arc.getCurrentWeight()
                 
         return sum
