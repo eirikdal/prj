@@ -100,6 +100,12 @@ class GenericANN:
                     print "error: ",node.get_delta(), "output: ",node.getActivationLevel()
                         
                 lastLayer.reset_for_training()
+        #print resulting weights
+        for link in self.__links:
+            print "from ",link.getPreLayer()," to ",link.getPostLayer()
+            for arc in link.getArcs():
+                print arc.getCurrentWeight()
+        print "----------------------------------------------------"
         
     def getFirstLayer(self):
         for layer in self.__layers:
