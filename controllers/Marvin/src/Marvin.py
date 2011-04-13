@@ -41,8 +41,14 @@ class Marvin (EpuckBasic):
         #print sensors
         for layer in self.ann.get_layers():
             if layer.get_type() == TYPE.INPUT:
-                sensors = map(lambda(x): x/4e3, sensors)
+                sensors = map(lambda(x): self.scaleSensor(x), sensors)
                 layer.init_input(sensors)
+            
+    def scaleSensor(self,x):
+        if(x/200 < 1): 
+            return x/200
+        else:
+            return 0.99
                 
     def get_output(self):
         for layer in self.ann.get_layers():
