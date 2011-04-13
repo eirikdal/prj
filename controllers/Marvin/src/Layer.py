@@ -8,7 +8,7 @@ def sigmoid(x):
     return math.tanh(x)
 
 def dsigmoid(y):
-    return 1.0 - y**2.0
+    return y - y**2.0
 
 #def ddsigmoid(y):
 #    return -2.0*y
@@ -38,6 +38,11 @@ def logistical(x):
 
 def dlogistical(y):
     return math.e ** (-y) / (math.e ** (-y) + 1.0) ** 2.0
+
+def right_sigmoid(x):
+    return 1.0 / (1.0 + math.e ** (-x))
+def dright_sigmoid(y):
+    return y * (1-y)
 
 class TYPE:
     INPUT = 0
@@ -98,7 +103,7 @@ class Layer(object):
                 for link in self.__links_in:
                     __sum += link.getOutWeights(node)
                 node.setMembranePotential(__sum)
-                print "sum ",__sum
+                #print "sum ",__sum
                 node.setActivationLevel(self.__activation_function(__sum))
                 #print "set activation lvl for a node in ",self.__name,": ",node.getActivationLevel()
     
@@ -116,7 +121,6 @@ class Layer(object):
                         float(self.__targetData[i]) - self.__nodes[i].getActivationLevel())) 
                     print "set delta for output node ", self.__nodes[i].get_delta()            
                 else:
-                    print "Layer: Calculate delta: ", i, self.__nodes[i].get_delta()
                     self.__nodes[i].set_delta(self.getDerivationFunction(self.__activation_function)( \
                         self.__nodes[i].get_delta_backup()))
                     #print "set delta for non-output node: ", self.__nodes[i].get_delta(), " - backup is: ",self.__nodes[i].get_delta_backup()
@@ -181,6 +185,8 @@ class Layer(object):
             return dstep
         if (function == plinear):
             return dplinear
+        if (function == right_sigmoid):
+            return dright_sigmoid
         
     def reset_for_training(self):
         self.__calculated_delta = False

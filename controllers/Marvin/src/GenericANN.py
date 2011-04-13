@@ -77,15 +77,16 @@ class GenericANN:
         for data in training_data:
             firstLayer = self.getFirstLayer()
             firstLayer.init_input(data[0])
+            print "first layer: ", firstLayer.get_name()
             
             for dat in data[0]:
                 print "data ",dat
             lastLayer = self.getLastLayer()
+            print "last layer: ", lastLayer.get_name()
             lastLayer.set_target_data(data[1])
             
             print "GenericANN: Executing training"
-            error_big = True
-            while error_big:
+            for i in range(1,300):
                 # execute layers
                 for name in self.__exec_order:
                     for layer in self.__layers:
@@ -94,15 +95,9 @@ class GenericANN:
                 #do backpropagation
                 lastLayer.backPropagate()
                 
-                error_big = False
                 for node in lastLayer.get_nodes():
+                    print "---------------------------------------------------------------"
                     print "error: ",node.get_delta(), "output: ",node.getActivationLevel()
-<<<<<<< HEAD
-=======
-                    print abs(node.get_delta())
->>>>>>> c4aa4b658efc64f3572ca065b02bc4d0a715590d
-                    if(abs(node.get_delta()) > 1.0):
-                        error_big = True
                         
                 lastLayer.reset_for_training()
         

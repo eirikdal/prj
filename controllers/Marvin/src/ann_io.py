@@ -89,6 +89,8 @@ class ann_io:
                 self.__layer.set_layer_act_func(Layer.sigmoid)
             elif s[1] == "dsigmoid":
                 self.__layer.set_layer_act_func(Layer.dsigmoid)
+            elif s[1] == "right_sigmoid":
+                self.__layer.set_layer_act_func(Layer.right_sigmoid)
             elif s[1] == "linear":
                 self.__layer.set_layer_act_func(Layer.linear)
             elif s[1] == "plinear":

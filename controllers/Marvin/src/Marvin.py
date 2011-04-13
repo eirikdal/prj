@@ -80,6 +80,8 @@ class Marvin (EpuckBasic):
             #for s in self.sensors:
                 #val = s.getValue()
             sens = self.get_proximities()
+            print "sensor data: -----"
+            print sens
             self.enter_input(sens)
             self.ann.execute()
             output = self.get_output()

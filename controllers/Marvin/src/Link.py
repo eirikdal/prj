@@ -9,8 +9,8 @@ class Link:
         self.__learning_mode = True
         self.__connectionType = ann_link.get_link_conn_top()
         range = ann_link.get_link_range()
-        self.__minWeight = int(range[0])
-        self.__maxWeight = int(range[1])
+        self.__minWeight = float(range[0])
+        self.__maxWeight = float(range[1])
         self.__connectionProb = ann_link.get_link_conn_prob()
         
         preLayer = ann_link.get_link_name_pre()
@@ -73,14 +73,14 @@ class Link:
     def backLearn(self):
         for arc in self.getArcs():
             arc.getPreNode().add_delta_backup(arc.getPostNode().get_delta() * arc.getCurrentWeight())
-            print "old arc value ",arc.getCurrentWeight()
+            #print "old arc value ",arc.getCurrentWeight()
             arc.setCurrentWeight(arc.getCurrentWeight() + \
                     self.__learningRule.getWeightChange( \
                         arc.getPreNode().getActivationLevel(), \
                         arc.getPostNode().get_delta(), \
                         arc.getCurrentWeight()))
-            print "learning rate: ",self.getLearningRule().getLearningRate(),", activ. lvl: ",arc.getPreNode().getActivationLevel(), ", delta: ",arc.getPostNode().get_delta()
-            print "new arc value ",arc.getCurrentWeight()
+            #print "learning rate: ",self.getLearningRule().getLearningRate(),", activ. lvl: ",arc.getPreNode().getActivationLevel(), ", delta: ",arc.getPostNode().get_delta()
+            #print "new arc value ",arc.getCurrentWeight()
         
     def getArcs(self):
         return self.__arcs
