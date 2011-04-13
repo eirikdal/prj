@@ -45,6 +45,7 @@ class ANN_LAYER:
     
 class ANN_ARC:
     def __init__(self,from_node,to_node,weight):
+        print "initializing arc ",self," with from_node: ",from_node
         self.__from_node = from_node
         self.__to_node = to_node
         self.__weight = weight

@@ -153,6 +153,7 @@ class Layer(object):
     def get_nodes(self):
         return self.__nodes
     def get_node(self,i):
+        print "node i ",i
         return self.__nodes[i]
         
     def set_active(self, active):
