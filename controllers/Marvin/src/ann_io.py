@@ -137,7 +137,6 @@ class ann_io:
         elif s[0] == "link_range":
             t = s[1].split(",")
             (min,max) = (t[0],t[1])
-            self.__link.set_link_range((min,max))
         elif s[0] == "arc":
             t = s[1].split(",")
             from_node,to_node,weight = int(t[0]),int(t[1]),float(t[2])

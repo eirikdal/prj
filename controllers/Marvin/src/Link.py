@@ -16,11 +16,6 @@ class Link:
         preLayer = ann_link.get_link_name_pre()
         postLayer = ann_link.get_link_name_post()
         
-        if len(self.__arcs) > 0:
-            self.__hardwired = True
-        else:
-            self.__hardwired = False
-        
         for layer in layers:
             if layer.get_name() == preLayer:
                 self.__preLayer = layer
@@ -35,8 +30,15 @@ class Link:
             
             arc = Arc(self.__preLayer.get_node(from_node),\
                       self.__postLayer.get_node(to_node),\
-                      weight,self)
+                      weight, self)
+            arc.setFrom(from_node)
+            arc.setTo(to_node)
             self.__arcs.append(arc)
+        
+        if len(self.__arcs) > 0:
+            self.__hardwired = True
+        else:
+            self.__hardwired = False
                 
 
     def connect(self):
@@ -139,7 +141,7 @@ class Link:
 
         for arc in self.__arcs:
             if arc.getPostNode() == node: 
-                print "getting output from layer ",self.__preLayer.get_name()," to ",self.__postLayer.get_name(), arc.getPreNode().getActivationLevel(), " * ",arc.getCurrentWeight()
+                print "getting output from layer ",self.__preLayer.get_name()," to ",self.__postLayer.get_name(), " ",arc.getFrom(),",",arc.getTo()," : ",arc.getPreNode().getActivationLevel(), " * ",arc.getCurrentWeight()
                 sum += arc.getPreNode().getActivationLevel() * arc.getCurrentWeight()
                 
         return sum

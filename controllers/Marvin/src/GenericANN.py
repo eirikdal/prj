@@ -69,6 +69,7 @@ class GenericANN:
                 link.setLearningRule(ClassicalHebbLearning(ann_link.get_link_learn_rate()))
                 
             if not link.isHardwired():
+                print "link not hardwired <<<<<<<<<<<<<<<<"
                 link.connect()
             else:
                 for layer in self.__layers:
