@@ -105,6 +105,7 @@ class Layer(object):
                 node.setMembranePotential(__sum)
                 #print "sum ",__sum
                 node.setActivationLevel(self.__activation_function(__sum))
+                #print "activation lvl ",node.getActivationLevel()
                 #print "set activation lvl for a node in ",self.__name,": ",node.getActivationLevel()
     
     def backPropagate(self):         
@@ -116,10 +117,10 @@ class Layer(object):
             print "calculate deltas"
             for i in range(len(self.__nodes)):
                 if(len(self.__links_out) == 0):
-                    print "test", self.__targetData
+                    #print "test", self.__targetData
                     self.__nodes[i].set_delta(self.getDerivationFunction(self.__activation_function)( \
                         float(self.__targetData[i]) - self.__nodes[i].getActivationLevel())) 
-                    print "set delta for output node ", self.__nodes[i].get_delta()            
+                    #print "set delta for output node ", self.__nodes[i].get_delta()            
                 else:
                     self.__nodes[i].set_delta(self.getDerivationFunction(self.__activation_function)( \
                         self.__nodes[i].get_delta_backup()))
