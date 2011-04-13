@@ -35,7 +35,9 @@ class Link:
             
             arc = Arc(self.__preLayer.get_node(from_node),\
                       self.__postLayer.get_node(to_node),\
-                      weight)
+                      weight, self)
+            arc.setFrom(from_node)
+            arc.setTo(to_node)
             self.__arcs.append(arc)
                 
 

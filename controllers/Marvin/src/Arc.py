@@ -3,7 +3,9 @@ class Arc:
     __postNode = []
     __currentWeight = 0
     __initialWeight = 0
-    __link = []        
+    __link = []
+    __from = -1
+    __to = -1
     
     def __init__(self, preNode, postNode, weight, link):
         self.__preNode = preNode
@@ -42,3 +44,13 @@ class Arc:
         
     def setLink(self, link):
         self.__link = link
+        
+    def getFrom(self):
+        return self.__from
+    def getTo(self):
+        return self.__to
+    
+    def setFrom(self, fr):
+        self.__from = fr
+    def setTo(self, to):
+        self.__to = to

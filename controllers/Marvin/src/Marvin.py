@@ -70,7 +70,7 @@ class Marvin (EpuckBasic):
         #self.move_wheels(left, right, duration)
         
         #print self.get_proximities()
-        pimg = self.snapshot(True)
+        pimg = self.snapshot(False)
         print pimg
         #print "proximities: "
         #print self.get_proximities()
