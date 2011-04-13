@@ -1,6 +1,8 @@
-from ann_data import ANN, TOPOLOGY, RULE, ANN_LAYER, ANN_LINK
+from ann_data import ANN, TOPOLOGY, RULE, ANN_LAYER, ANN_LINK, ANN_ARC
 from Layer import TYPE
 import Layer
+
+def 
 
 def read_training_data():
     file = open("training.txt")
@@ -28,6 +30,7 @@ class ann_io:
         __exec_order = False
         __new_layer = False
         __new_link = False
+        __new_arc = False
         
         print "ann_io: Begin parsing script"
 
@@ -46,6 +49,10 @@ class ann_io:
                 self.__link = ANN_LINK()
                 __new_link = True
                 continue
+            elif str[0] == "begin" and str[1] == "arc":
+                self.__arc = ANN_ARC()
+                __new_arc = True
+                continue
             elif str[0] == "end" and str[1] == "exec_order":
                 __exec_order = False
                 continue
@@ -57,6 +64,9 @@ class ann_io:
                 self.__data.add_link(self.__link)
                 __new_link = False
                 continue
+            elif str[0] == "end" and str[1] == "arc":
+                self.__data.get_links()#(self.__link)
+                __new_arc = False
             if not __exec_order:
                 self.__parse(str)
             else:
@@ -131,6 +141,10 @@ class ann_io:
             t = s[1].split(",")
             (min,max) = (t[0],t[1])
             self.__link.set_link_range((min,max))
-        
+        elif s[0] == "arc":
+            t = s[1].split(",")
+            from_node,to_node,weight = int(s[0]),int(s[1]),float(s[2])
+            self.__link.add_arc(ANN_ARC(from_node,to_node,weight))
+            
         
         

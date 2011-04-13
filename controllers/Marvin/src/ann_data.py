@@ -45,15 +45,30 @@ class ANN_LAYER:
     def get_layer_act_func(self):
         return self.__layer_act_func
     
+class ANN_ARC:
+    def __init__(self,from_node,to_node,weight):
+        self.__from_node = from_node
+        self.__to_node = to_node
+        self.__weight = weight
+    
+    def get_from_node(self):
+        self.__from_node
+    def get_to_node(self):
+        self.__to_node
+    def get_weight(self):
+        self.__weight
+
 class ANN_LINK:
-    __link_name_pre = ""
-    __link_name_post = ""
-    __link_conn_top = TOPOLOGY.ONEONE
-    __link_conn_prob = ""
-    __link_learn_rate = ""
-    __link_learn_rule = ""
-    __link_learn_param = 0.3
-    __link_range = (0,1)
+    def __init__(self):
+        self.__link_name_pre = ""
+        self.__link_name_post = ""
+        self.__link_conn_top = TOPOLOGY.ONEONE
+        self.__link_conn_prob = ""
+        self.__link_learn_rate = ""
+        self.__link_learn_rule = ""
+        self.__link_learn_param = 0.3
+        self.__link_range = (0,1)
+        self.__link_arcs = []
     
     def set_link_name_pre(self,pre):
         self.__link_name_pre = pre
@@ -94,6 +109,11 @@ class ANN_LINK:
         self.__link_range = (min,max)
     def get_link_range(self):
         return self.__link_range
+    
+    def add_arc(self, arc):
+        self.__link_arcs.append(arc)
+    def get_arcs(self):
+        return self.__link_arcs
 
 class ANN:
     __layers = []
