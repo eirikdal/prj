@@ -18,12 +18,10 @@ class RULE:
 
 class ANN_LAYER:
     def __init__(self):
-        self
-        
-    __layer_name = ""
-    __layer_type = ""
-    __layer_size = -1
-    __layer_act_func = ACTIVATION.SIGMOID
+        self.__layer_name = ""
+        self.__layer_type = ""
+        self.__layer_size = -1
+        self.__layer_act_func = ACTIVATION.SIGMOID
     
     def set_layer_name(self,name):
         self.__layer_name = name
@@ -116,14 +114,12 @@ class ANN_LINK:
         return self.__link_arcs
 
 class ANN:
-    __layers = []
-    __links = []
-    __exec_order = []
-    
-    range = (0,0)
-    
     def __init__(self):
-        self
+        self.__layers = []
+        self.__links = []
+        self.__exec_order = []
+        
+        self.range = (0,0)
     
     def add_link(self,link):
         self.__links.append(link)

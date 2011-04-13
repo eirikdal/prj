@@ -69,6 +69,11 @@ class GenericANN:
                 
             if not link.isHardwired():
                 link.connect()
+            else:
+                for layer in self.__layers:
+                    layer.set_learning(False)
+                for link in self.__links:
+                    link.setLearningMode(False)
         
         self.__exec_order = __ann_data.get_exec_order()
         
