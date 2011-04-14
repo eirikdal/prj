@@ -1,0 +1,68 @@
+begin layer
+layer_name sensors
+layer_type input
+layer_size 8
+layer_act_func step
+end layer
+
+begin layer
+layer_name hidden
+layer_type hidden
+layer_size 3
+layer_act_func step
+end layer
+
+begin layer
+layer_name motors
+layer_type output
+layer_size 3
+layer_act_func linear
+end layer
+
+begin link
+link_name_pre sensors
+link_name_post hidden
+link_conn_top full
+link_conn_prob 0.6
+link_learn_rule classical-hebb
+link_learn_param 0.3
+link_learn_rate 0.3
+link_range -0.1,0.1
+
+begin arc
+arc 0,0,0.9
+arc 1,0,0.9
+arc 2,0,0.7
+arc 7,1,0.9
+arc 6,1,0.9
+arc 5,1,0.7
+arc 0,2,0.8
+arc 7,2,0.8
+arc 1,2,0.7
+arc 6,2,0.7
+end arc
+
+end link
+
+begin link
+link_name_pre hidden
+link_name_post motors
+link_conn_top full
+link_conn_prob 0.6
+link_learn_rule classical-hebb
+link_learn_param 0.3
+link_learn_rate 0.3
+link_range -0.1,0.1
+
+begin arc
+arc 0,1,0.5
+arc 1,0,0.5
+arc 2,2,0.8
+end arc
+
+end link
+
+begin exec_order
+hidden 0
+motors 1
+end exec_order

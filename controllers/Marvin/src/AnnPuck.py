@@ -7,7 +7,7 @@ class AnnPuck(AgentANN):
 
     def __init__(self, agent, e_thresh, nvect, cvect, svect, band, snapshow,
                    concol, ann_cycles, agent_cycles, act_noise,
-                   tfile):
+                   tfile, training_rounds):
         print "AnnPuck constructor called"
         self.agent = agent
         self.e_thresh = e_thresh
@@ -20,6 +20,7 @@ class AnnPuck(AgentANN):
         self.ann_cycles = ann_cycles
         self.agent_cycles = agent_cycles
         self.act_noise = act_noise
+        self.training_rounds = training_rounds
         
         AgentANN.__init__(self)
         

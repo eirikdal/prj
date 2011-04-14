@@ -19,6 +19,9 @@ class GenericANN:
     def stop_training(self):
         for link in self.__links:
             link.setLearningMode(False)
+            
+    def is_hardwired(self):
+        return self.__hard_wired
     
     def __init__(self):
         print "GenericANN: Constructor called"
@@ -69,7 +72,6 @@ class GenericANN:
                 link.setLearningRule(ClassicalHebbLearning(ann_link.get_link_learn_rate()))
                 
             if not link.isHardwired():
-                print "link not hardwired <<<<<<<<<<<<<<<<"
                 link.connect()
             else:
                 for layer in self.__layers:
@@ -95,7 +97,7 @@ class GenericANN:
                 lastLayer.set_target_data(data[1])
                 
                 print "GenericANN: Executing training"
-                for i in range(1,300):
+                for i in range(1,self.training_rounds):
                     # execute layers
                     for name in self.__exec_order:
                         for layer in self.__layers:

@@ -15,6 +15,7 @@ from imagepro import column_avg
 from Layer import TYPE
 from AnnPuck import AnnPuck
 from ann_io import read_training_data
+from random import uniform
 import prims1
 
 # Here is the main class of your controller.
@@ -27,7 +28,7 @@ class Marvin (EpuckBasic):
         self.basic_setup() # defined for EpuckBasic 
         self.ann = AnnPuck(agent = self, e_thresh = e_thresh, nvect = nvect, cvect = cvect, svect = svect, band = band, snapshow = snapshow,
                    concol = concol, ann_cycles = ann_cycles, agent_cycles = agent_cycles, act_noise = act_noise,
-                   tfile = tfile)
+                   tfile = tfile, training_rounds = 50)
         
         self.sensors = [self.getDistanceSensor('ps' + str(i)) for i in range(8)]
         for s in self.sensors: s.enable(int(self.getBasicTimeStep()))
@@ -60,15 +61,6 @@ class Marvin (EpuckBasic):
     def run(self):
         # You should insert a getDevice-like function in order to get the
         # instance of a device of the robot. Something like:
-        #  led = self.getLed('ledname')
-        '''
-        1. get_proximities(): vector with values from the 8 distance sensors
-        2. snapshot()
-        3. move, move_wheels, set_wheel_speeds
-        4. run_timestep, do_timed_action
-        '''
-        #self.move_wheels(left, right, duration)
-        
         #print self.get_proximities()
         pimg = self.snapshot(False)
         print pimg
@@ -81,29 +73,18 @@ class Marvin (EpuckBasic):
         
         # Main loop
         while True:
-      
             # Read the sensors:
-            # Enter here functions to read sensor data, like:
-            #for s in self.sensors:
-                #val = s.getValue()
             sens = self.get_proximities()
-            print "sensor data: -----"
-            print sens
+            
+            # Process sensor data here.
             self.enter_input(sens)
             self.ann.execute()
             output = self.get_output()
             
-            left = 0
-            right = 0
-            
-            for i in range(len(output)/2):
-                left += output[i]
-                right += output[len(output)-1-i]
-            
-            self.set_wheel_speeds(left, right)
-            
-            # Process sensor data here.
-            #self.enter_input(img)
+            if self.ann.is_hardwired():
+                self.set_wheel_speeds(output[0]-output[2]+uniform(0.3,0.5), output[1]-output[2]+uniform(0.3,0.5))
+            else:
+                self.set_wheel_speeds(output[0], output[1])
             # Enter here functions to send actuator commands, like:
             #  led.set(1)
             
