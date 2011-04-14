@@ -1,0 +1,28 @@
+begin layer
+layer_name sensors
+layer_type input
+layer_size 8
+layer_act_func right_sigmoid
+end layer
+
+begin layer
+layer_name motors
+layer_type output
+layer_size 2
+layer_act_func right_sigmoid
+end layer
+
+begin link
+link_name_pre sensors
+link_name_post motors
+link_conn_top full
+link_conn_prob 0.6
+link_learn_rule classical-hebb
+link_learn_param 0.3
+link_learn_rate 0.3
+link_range -0.1,0.1
+end link
+
+begin exec_order
+motors 0
+end exec_order
